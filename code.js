@@ -34,14 +34,20 @@ inputMinute.addEventListener("input", setAlarm);
 function setAlarm (){
 	var currentTime = startTime();
 	var setHour = document.getElementById('setHour').value;
+	var formattedHour = ("0" + setHour).slice(-2);
 	var setMinute = document.getElementById('setMinute').value;
+	var formattedMinute = ("0" + setMinute).slice(-2);
 	var second = "00";
-	var alarm = (setHour || "00") + ":" + (setMinute || "00") + ":" + second;
+	formattedHour = checkTime();
+
+	var alarm = (formattedHour || "00") + ":" + (formattedMinute || "00") + ":" + second;
 	document.getElementById("alarmTime").innerHTML = alarm;
-	if (currentTime === alarm){
-
-	}
-
+	return alarm;
 }
 
+setInterval (function(){
+	if (startTime() === setAlarm()){
+			document.getElementById("imgAlarm").style.display = "block";
+	}
+}, 1000);
 
