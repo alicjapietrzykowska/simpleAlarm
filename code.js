@@ -33,21 +33,19 @@ inputMinute.addEventListener("input", setAlarm);
 
 function setAlarm (){
 	var currentTime = startTime();
-	var setHour = document.getElementById('setHour').value;
-	var formattedHour = ("0" + setHour).slice(-2);
-	var setMinute = document.getElementById('setMinute').value;
-	var formattedMinute = ("0" + setMinute).slice(-2);
+	var formattedHour = (inputHour.value).slice(-2);
+	var formattedMinute = (inputMinute.value).slice(-2)
 	var second = "00";
-	formattedHour = checkTime();
-
+	formattedHour = checkTime(formattedHour);
+	formattedMinute = checkTime(formattedMinute);
 	var alarm = (formattedHour || "00") + ":" + (formattedMinute || "00") + ":" + second;
 	document.getElementById("alarmTime").innerHTML = alarm;
 	return alarm;
 }
 
-setInterval (function(){
-	if (startTime() === setAlarm()){
+setInterval (function(){ 
+	if (startTime() === setAlarm() ){
 			document.getElementById("imgAlarm").style.display = "block";
 	}
-}, 1000);
+}, 1000); 
 
