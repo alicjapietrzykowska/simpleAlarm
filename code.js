@@ -19,23 +19,41 @@ function startTime (){
 function checkTime(i){
 	if (i < 10){
 		return "0" + i;
-	}else{
+	} else {
 		return i;
 	}
-
 }
 
 var inputHour = document.getElementById('setHour');
 var inputMinute = document.getElementById('setMinute');
 
+inputHour.oninput = function () {
+	if (this.value.length >= 2){
+		this.value = this.value.slice(0,2);
+	}
+}
+
+inputMinute.oninput = function () {
+	if (this.value.length >= 2){
+		this.value = this.value.slice(0,2);
+	}
+}
+
 inputHour.addEventListener("input", setAlarm);
 inputMinute.addEventListener("input", setAlarm);
 
+
 function setAlarm (){
 	var currentTime = startTime();
-	var formattedHour = (inputHour.value).slice(-2);
-	var formattedMinute = (inputMinute.value).slice(-2)
+	var formattedHour = inputHour.value || "0";
+	var formattedMinute = inputMinute.value || "0";
 	var second = "00";
+	if (formattedHour > 24){
+		formattedHour = formattedHour.length[0];
+	}
+	if (formattedMinute > 60){
+		formattedMinute = formattedMinute.length[0];
+	}
 	formattedHour = checkTime(formattedHour);
 	formattedMinute = checkTime(formattedMinute);
 	var alarm = (formattedHour || "00") + ":" + (formattedMinute || "00") + ":" + second;
@@ -46,6 +64,14 @@ function setAlarm (){
 setInterval (function(){ 
 	if (startTime() === setAlarm() ){
 			document.getElementById("imgAlarm").style.display = "block";
+	} else {
+		document.getElementById("imgAlarm").style.display = "none";
 	}
 }, 1000); 
 
+document.querySelector("input").addEventListener("keypress", function (evt) {
+    if (evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
