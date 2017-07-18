@@ -2,22 +2,30 @@
 <html>
 
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Simple Alarm!</title>
 </head>
 
-<body onload="startTime()">
+<body>
+	<div class="wrapper">
+		<h1>Ustaw budzik!</h1>
+		<p id="currentTime"></p>
+		<input class="input" type="number" min="00" max="23" id="setHour">
+		<input class="input" type="number" min="00" max="59" id="setMinute">
+		<p id="alarmTime"></p>
+		<img id="imgAlarm" src="http://clinicalengineering.in/wp-content/uploads/2014/01/alarm.jpg"></img>
 
-<div>
-	<h1>Tu będzie budzik!</h1>
-	<p id="currentTime"></p>
+		<audio id="music">
+		  <source src="Chat Noir Theme.ogg" type="audio/ogg">
+		  <p>Your browser doesn't support HTML5 audio.</p>
+		</audio>
 
-	<input class="input" type="number" min="00" max="23" id="setHour">
-	<input class="input" type="number" min="00" max="59" id="setMinute">
-	<p id="alarmTime"></p>
-	<img id="imgAlarm" src="http://clinicalengineering.in/wp-content/uploads/2014/01/alarm.jpg"></img>
+		<button id="napBtn">Drzemka 5 minut</button>
+		<button id ="stopBtn">Wyłacz budzik</button>
 
-</div>
 
+	</div>
 </body>
 
 <script src ="code.js"></script>

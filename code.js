@@ -2,6 +2,19 @@
 var h1 = document.querySelector("h1");
 h1.style.color = "blue";
 
+	var date = new Date();
+
+var inputHour = document.getElementById('setHour');
+var inputMinute = document.getElementById('setMinute');
+var alarmSecond = "00";
+
+var nap = false;
+
+var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
+currentDay = days[date.getDay()];
+
+window.onload = startTime();
+
 function startTime (){
 	var date = new Date();
 	var hours = date.getHours();
@@ -10,11 +23,71 @@ function startTime (){
 	minutes = checkTime(minutes);
 	seconds = checkTime(seconds);
 	var currentTime = hours + ":" + minutes + ":" + seconds;
-	console.log(currentTime);
-	document.getElementById("currentTime").innerHTML = currentTime;
+	document.getElementById("currentTime").innerHTML = currentTime + " " + currentDay;
 	setTimeout(startTime, 500);
 	return currentTime;
 }
+
+inputHour.addEventListener("input", setAlarm);
+inputMinute.addEventListener("input", setAlarm);
+
+function setAlarm (){
+	var formattedHour = inputHour.value || "0";
+	var formattedMinute = inputMinute.value || "0";
+	formattedHour = checkTime(formattedHour);
+	formattedHour = formattedHour || "00";
+	formattedMinute = formattedMinute || "00";
+
+	if (nap === true){
+		formattedMinute = parseFloat(formattedMinute) + 5;
+		if (formattedMinute > 59){
+			formattedHour = parseFloat(formattedHour) + 1;
+			formattedMinute = String(formattedMinute).charAt(1);
+		}
+		inputHour.value = formattedHour;
+		inputMinute.value = formattedMinute;
+
+		nap = false;
+	}
+	formattedMinute = checkTime(formattedMinute);
+	var alarm = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
+	document.getElementById("alarmTime").innerHTML = alarm;
+	return alarm;
+}
+
+var audio = document.getElementById("music");
+var napBtn = document.getElementById("napBtn");
+var stopBtn = document.getElementById("stopBtn");
+var imgAlarm = document.getElementById("imgAlarm");
+
+setInterval (function(){ 
+	if (startTime() === setAlarm() ){
+		alarm();
+	}
+}, 1000); 
+
+napBtn.addEventListener("click", napTime);
+
+function alarm (){
+	imgAlarm.style.display = "block";
+	audio.play();
+	napBtn.addEventListener("click", napTime);
+	stopBtn.addEventListener("click", stopAlarm);	
+}
+
+function napTime(minute) {
+	audio.pause();
+	audio.currentTime = 0;
+	imgAlarm.style.display = "none";
+	nap = true;
+}
+
+function stopAlarm() {
+	audio.pause();
+	audio.currentTime = 0;
+	imgAlarm.style.display = "none";
+}
+
 
 function checkTime(i){
 	if (i < 10){
@@ -23,10 +96,6 @@ function checkTime(i){
 		return i;
 	}
 }
-
-var inputHour = document.getElementById('setHour');
-var inputMinute = document.getElementById('setMinute');
-var second = "00";
 
 inputHour.oninput = function () {
 	if (this.value > 23){
@@ -46,28 +115,6 @@ inputMinute.oninput = function () {
 	}
 }
 
-inputHour.addEventListener("input", setAlarm);
-inputMinute.addEventListener("input", setAlarm);
-
-
-function setAlarm (){
-	var currentTime = startTime();
-	var formattedHour = inputHour.value || "0";
-	var formattedMinute = inputMinute.value || "0";
-	formattedHour = checkTime(formattedHour);
-	formattedMinute = checkTime(formattedMinute);
-	var alarm = (formattedHour || "00") + ":" + (formattedMinute || "00") + ":" + "00";
-	document.getElementById("alarmTime").innerHTML = alarm;
-	return alarm;
-}
-
-setInterval (function(){ 
-	if (startTime() === setAlarm() ){
-			document.getElementById("imgAlarm").style.display = "block";
-	} else {
-		document.getElementById("imgAlarm").style.display = "none";
-	}
-}, 1000); 
 
 document.querySelector("#setHour").addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
