@@ -24,7 +24,7 @@ function startTime (){
 	seconds = checkTime(seconds);
 	var currentTime = hours + ":" + minutes + ":" + seconds;
 	document.getElementById("currentTime").innerHTML = currentTime + " " + currentDay;
-	setTimeout(startTime, 500);
+	window.setTimeout(startTime, 500);
 	return currentTime;
 }
 
@@ -50,9 +50,9 @@ function setAlarm (){
 		nap = false;
 	}
 	formattedMinute = checkTime(formattedMinute);
-	var alarm = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
-	document.getElementById("alarmTime").innerHTML = alarm;
-	return alarm;
+	var alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
+	document.getElementById("alarmTime").innerHTML = alarmTime;
+	return alarmTime;
 }
 
 var audio = document.getElementById("music");
@@ -60,11 +60,12 @@ var napBtn = document.getElementById("napBtn");
 var stopBtn = document.getElementById("stopBtn");
 var imgAlarm = document.getElementById("imgAlarm");
 
-setInterval (function(){ 
-	if (startTime() === setAlarm() ){
-		alarm();
-	}
-}, 1000); 
+// setInterval (function(){ 
+// 	if (startTime() === setAlarm() ){
+// 		alarm();
+// 	}
+// }, 1000); 
+
 
 napBtn.addEventListener("click", napTime);
 
@@ -129,3 +130,24 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
         evt.preventDefault();
     }
 });
+
+var allDays = document.querySelector("fieldset");
+
+allDays.addEventListener("click", checkDay);
+
+function checkDay (evt){
+	if (evt.target.name === "day"){
+		if (evt.target.checked){
+			if (evt.target.value === currentDay){
+				alarmDays.innerHTML = evt.target.value;
+			}
+		}
+	}
+}
+var alarmDays = document.querySelector("#alarmDays");
+
+setInterval (function(){ 
+	if (startTime() === setAlarm()){
+		alarm();
+	}
+}, 1000); 
