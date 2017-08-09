@@ -2,19 +2,23 @@
 var h1 = document.querySelector("h1");
 h1.style.color = "blue";
 
-	var date = new Date();
+var date = new Date();
 
-var inputHour = document.getElementById('setHour');
-var inputMinute = document.getElementById('setMinute');
+var alarmDays = document.querySelector("#alarmDays");
+var inputHour = document.getElementById("setHour");
+var inputMinute = document.getElementById("setMinute");
 var alarmSecond = "00";
 
 var nap = false;
 
 var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
+
 currentDay = days[date.getDay()];
 
+//After load a page start clock
 window.onload = startTime();
 
+//Function to make clock work
 function startTime (){
 	var date = new Date();
 	var hours = date.getHours();
@@ -37,7 +41,7 @@ function setAlarm (){
 	formattedHour = checkTime(formattedHour);
 	formattedHour = formattedHour || "00";
 	formattedMinute = formattedMinute || "00";
-
+	// set nap if nap === true
 	if (nap === true){
 		formattedMinute = parseFloat(formattedMinute) + 5;
 		if (formattedMinute > 59){
@@ -46,7 +50,6 @@ function setAlarm (){
 		}
 		inputHour.value = formattedHour;
 		inputMinute.value = formattedMinute;
-
 		nap = false;
 	}
 	formattedMinute = checkTime(formattedMinute);
@@ -60,15 +63,10 @@ var napBtn = document.getElementById("napBtn");
 var stopBtn = document.getElementById("stopBtn");
 var imgAlarm = document.getElementById("imgAlarm");
 
-// setInterval (function(){ 
-// 	if (startTime() === setAlarm() ){
-// 		alarm();
-// 	}
-// }, 1000); 
-
-
+//lister if user choose to have nap
 napBtn.addEventListener("click", napTime);
 
+//what comes after startTime === setAlarm
 function alarm (){
 	imgAlarm.style.display = "block";
 	audio.play();
@@ -76,6 +74,7 @@ function alarm (){
 	stopBtn.addEventListener("click", stopAlarm);	
 }
 
+//what comes if user choose to nap for some time
 function napTime(minute) {
 	audio.pause();
 	audio.currentTime = 0;
@@ -83,13 +82,14 @@ function napTime(minute) {
 	nap = true;
 }
 
+//what comes if user choose to stop alarm
 function stopAlarm() {
 	audio.pause();
 	audio.currentTime = 0;
 	imgAlarm.style.display = "none";
 }
 
-
+//function to add "0" to inputted time if it has only one digit
 function checkTime(i){
 	if (i < 10){
 		return "0" + i;
@@ -98,6 +98,8 @@ function checkTime(i){
 	}
 }
 
+
+//prevent input from setting number greater than 23, slice it to two digit if more
 inputHour.oninput = function () {
 	if (this.value > 23){
 		this.value = this.value[0];
@@ -107,6 +109,7 @@ inputHour.oninput = function () {
 	}
 }
 
+//prevent input from setting number greater than 59, slice it to two digit if more
 inputMinute.oninput = function () {
 	if (this.value > 59){
 		this.value = this.value[0];
@@ -116,7 +119,7 @@ inputMinute.oninput = function () {
 	}
 }
 
-
+//function to prevent input other than digits to hours
 document.querySelector("#setHour").addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
     {
@@ -124,6 +127,7 @@ document.querySelector("#setHour").addEventListener("keypress", function (evt) {
     }
 });
 
+//function to prevent input other than digits to minutes
 document.querySelector("#setMinute").addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
     {
@@ -131,23 +135,34 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
     }
 });
 
-var allDays = document.querySelector("fieldset");
 
-allDays.addEventListener("click", checkDay);
+var allDays = document.getElementsByName("day");
+var alarmDays = document.getElementById("alarmDays");
+var alarmDaysToRemove = document.getElementById("alarmDaysToRemove");
 
-function checkDay (evt){
-	if (evt.target.name === "day"){
-		if (evt.target.checked){
-			if (evt.target.value === currentDay){
-				alarmDays.innerHTML = evt.target.value;
+
+var checkedDays = [];
+
+for (var i of allDays){
+	i.addEventListener("click", checkDay);
+}
+
+
+function checkDay(){
+	if (this.checked){
+		checkedDays.push(this.value);
+		alarmDays.innerHTML = checkedDays;
+	} 
+};
+
+
+//start alarm if current time === set alarm
+setInterval (function(){ 
+	for (var i=0; i < checkedDays.length; i++){
+		if (checkedDays[i] === currentDay){
+			if (startTime() === setAlarm()){
+			alarm();
 			}
 		}
-	}
-}
-var alarmDays = document.querySelector("#alarmDays");
-
-setInterval (function(){ 
-	if (startTime() === setAlarm()){
-		alarm();
 	}
 }, 1000); 
