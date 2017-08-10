@@ -149,16 +149,24 @@ for (var i of allDays){
 
 
 function checkDay(){
-	if (this.checked){
-		checkedDays.push(this.value);
-		alarmDays.innerHTML = checkedDays;
-	} 
+		if (this.checked){
+			checkedDays.push(this);
+		} 
+		else {
+			for (var i = 0; i < checkedDays.length; i++){
+				if (checkedDays[i].checked === false){
+					checkedDays.splice(i, 1);
+				}else {
+					continue;
+				}
+			}
+		}
 };
-
 
 //start alarm if current time === set alarm
 setInterval (function(){ 
 	for (var i=0; i < checkedDays.length; i++){
+
 		if (checkedDays[i] === currentDay){
 			if (startTime() === setAlarm()){
 			alarm();
