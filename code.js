@@ -12,6 +12,14 @@ var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','S
 var date = new Date();
 var currentDay = days[date.getDay()];
 
+//function to add "0" to inputted time if it has only one digit
+function checkTime(i){
+	if (i < 10){
+		return "0" + i;
+	} else {
+		return i;
+	}
+}
 
 //Function to make clock work
 function startTime (){
@@ -87,14 +95,6 @@ function stopAlarm() {
 	imgAlarm.style.display = "none";
 }
 
-//function to add "0" to inputted time if it has only one digit
-function checkTime(i){
-	if (i < 10){
-		return "0" + i;
-	} else {
-		return i;
-	}
-}
 
 //prevent input from setting number greater than 23, slice it to two digit if more
 inputHour.oninput = function () {
@@ -134,41 +134,93 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
 
 //check day to set alarm
 var allDays = document.getElementsByName("day");
+var fewDays = document.getElementsByName("fewDays");
+var weekendDays = document.querySelectorAll(".weekend");
+var allWeekdays = document.querySelectorAll(".weekdays");
+
 var alarmDays = document.getElementById("alarmDays");
 var checkedDays = [];
 
 var allWeek = document.querySelector("#allWeek");
+var weekdays = document.querySelector("#weekdays");
+var weekend = document.querySelector("#weekend");
 
-if (allWeek.checked){
-	
-}
+allWeek.addEventListener('click', function(){
+	if (allWeek.checked){
+		for (var i = 0; i < allDays.length; i++){
+			allDays[i].checked = true;
+		}	
+	} else {
+		for (var i = 0; i < allDays.length; i++){
+			allDays[i].checked = false;
+		}	
+	}
+})
 
-for (var i of allDays){
-	i.addEventListener("click", checkDay);
-}
+weekdays.addEventListener('click', function(){
+	if (weekdays.checked){
+		for (var i = 0; i < (allDays.length-2); i++){
+			allDays[i].checked = true;
+		}	
+	} else {
+		for (var i = 0; i < (allDays.length-2); i++){
+			allDays[i].checked = false;
+		}	
+	}
+});
 
-function checkDay(){
-	if (this.checked){
-		checkedDays.push(this);
-	} 
-	else {
-		for (var i = 0; i < checkedDays.length; i++){
-			if (checkedDays[i].checked === false){
-				checkedDays.splice(i, 1);
-			} else {
-				continue;
-			}
+weekend.addEventListener('click', function(){
+	if (weekend.checked){
+		for (var i = 0; i < weekendDays.length; i++){
+			weekendDays[i].checked = true;
+		}	
+	} else {
+		for (var i = 0; i < weekendDays.length; i++){
+			weekendDays[i].checked = false;
+		}	
+	}
+});
+
+// for (var i of allDays){
+// 	i.addEventListener("click", checkDay);
+// }
+
+// for (var i of fewDays){
+// 	i.addEventListener("click", checkDay);
+// }
+
+// function checkDay(){
+// 	if (this.checked){
+// 		checkedDays.push(this);
+// 	} 
+// 	else {
+// 		for (var i = 0; i < checkedDays.length; i++){
+// 			if (checkedDays[i].checked === false){
+// 				checkedDays.splice(i, 1);
+// 			} else {
+// 				continue;
+// 			}
+// 		}
+// 	}
+// };
+function checkDay (){
+	for (var i = 0; i < allDays.length; i++) {
+		if (allDays[i].checked){
+			checkedDays.push(allDays[i]);
+		} else if (allDays[i].checked === false){
+			checkedDays.splice(i, 1);
 		}
 	}
-};
+}
 
 //start alarm if current time === set alarm
 setInterval (function(){ 
+	checkDay();
 	for (var i=0; i < checkedDays.length; i++){
 		if (checkedDays[i].value === currentDay){
 			if (startTime() === setAlarm()){
-			alarm();
+				alarm();
 			}
 		}
 	}
-}, 1000); 
+}, 1000);
