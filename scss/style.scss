@@ -1,0 +1,22 @@
+@import "settings";
+
+.wrapper {
+	margin: 50px auto;
+	padding: 20px;
+	width: 50%;
+	background: linear-gradient(to top,#6d61a5 20%, #392d75 100%);
+	border: 2px solid #eee;
+	border-radius: 10px;
+}
+
+#setAlarmDiv {
+	
+}
+
+// input[type=checkbox] {
+// 	opacity: 0;
+// }
+
+#alarmDiv {
+	display: none;
+}

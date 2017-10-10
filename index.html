@@ -3,29 +3,23 @@
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Simple Alarm!</title>
 </head>
 
 <body>
-	<div class="wrapper">
-		<h1>Ustaw budzik!</h1>
+	<div class="wrapper" id="setAlarmDiv">
 		<p id="currentTime"></p>
 		<input class="input" type="number" min="00" max="23" id="setHour">
 		<input class="input" type="number" min="00" max="59" id="setMinute">
 		<p id="alarmTime"></p>
-		<img id="imgAlarm" src="http://clinicalengineering.in/wp-content/uploads/2014/01/alarm.jpg"></img>
 
 		<audio id="music">
 		  <source src="Chat Noir Theme.ogg" type="audio/ogg">
 		  <p>Your browser doesn't support HTML5 audio.</p>
 		</audio>
 
-		<button id="napBtn">Drzemka 5 minut</button>
-		<button id ="stopBtn">Wyłacz budzik</button>
-
-
-		<fieldset>
+		<fieldset class="days">
 		  <legend>W jakie dni tygodnia zadzwonic?</legend>
 		  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon" class="weekdays">
 		  <label for="check_mon">Poniedziałek</label>
@@ -43,7 +37,7 @@
 		  <label for="check_sun">Niedziela</label>
 		</fieldset>
 
-		<fieldset>
+		<fieldset class="fewDays">
 			<legend>Masowe zaznaczanie</legend>
 			<input type="checkbox" name="fewDays" id="allWeek">
 			<label for="allWeek">Cały tydzien</label>
@@ -52,12 +46,13 @@
 			<input type="checkbox" name="fewDays" id="weekend">
 			<label for="weekend">Weekend</label>
 		</fieldset>
-
-		<p id="alarmDays"></p>
-		<p id="alarmDaysToRemove"></p>
-
-
 	</div>
+	
+	<div class="wrapper" id="alarmDiv">
+		<button id="napBtn">Drzemka 5 minut</button>
+		<button id ="stopBtn">Wyłacz budzik</button>
+	</div>
+
 </body>
 
 <script src ="code.js"></script>

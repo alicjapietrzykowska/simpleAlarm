@@ -67,14 +67,14 @@ function setAlarm (){
 var audio = document.getElementById("music");
 var napBtn = document.getElementById("napBtn");
 var stopBtn = document.getElementById("stopBtn");
-var imgAlarm = document.getElementById("imgAlarm");
+// var imgAlarm = document.getElementById("imgAlarm");
 
 //lister if user choose to have nap
 napBtn.addEventListener("click", napTime);
 
 //what comes after startTime === setAlarm
 function alarm (){
-	imgAlarm.style.display = "block";
+	// imgAlarm.style.display = "block";
 	audio.play();
 	napBtn.addEventListener("click", napTime);
 	stopBtn.addEventListener("click", stopAlarm);	
@@ -84,7 +84,7 @@ function alarm (){
 function napTime(minute) {
 	audio.pause();
 	audio.currentTime = 0;
-	imgAlarm.style.display = "none";
+	// imgAlarm.style.display = "none";
 	nap = true;
 }
 
@@ -92,7 +92,7 @@ function napTime(minute) {
 function stopAlarm() {
 	audio.pause();
 	audio.currentTime = 0;
-	imgAlarm.style.display = "none";
+	// imgAlarm.style.display = "none";
 }
 
 
@@ -137,13 +137,11 @@ var allDays = document.getElementsByName("day");
 var fewDays = document.getElementsByName("fewDays");
 var weekendDays = document.querySelectorAll(".weekend");
 var allWeekdays = document.querySelectorAll(".weekdays");
-
-var alarmDays = document.getElementById("alarmDays");
-var checkedDays = [];
-
 var allWeek = document.querySelector("#allWeek");
 var weekdays = document.querySelector("#weekdays");
 var weekend = document.querySelector("#weekend");
+
+var checkedDays = [];
 
 allWeek.addEventListener('click', function(){
 	if (allWeek.checked){
@@ -190,32 +188,58 @@ weekend.addEventListener('click', function(){
 // }
 
 // function checkDay(){
-// 	if (this.checked){
-// 		checkedDays.push(this);
-// 	} 
-// 	else {
-// 		for (var i = 0; i < checkedDays.length; i++){
-// 			if (checkedDays[i].checked === false){
-// 				checkedDays.splice(i, 1);
-// 			} else {
-// 				continue;
+// 	for (var j = 0; j < allDays.length; j++){
+// 		if (allDays[j].checked){
+// 			checkedDays.push(allDays[j]);
+// 		} 
+// 		else {
+// 			for (var i = 0; i < checkedDays.length; i++){
+// 				if (checkedDays[i].checked === false){
+// 					checkedDays.splice(i, 1);
+// 				} else {
+// 					continue;
+// 				}
 // 			}
 // 		}
 // 	}
 // };
-function checkDay (){
-	for (var i = 0; i < allDays.length; i++) {
-		if (allDays[i].checked){
+// function checkDay (){
+// 	for (var i = 0; i < allDays.length; i++) {
+// 		if (allDays[i].checked){
+// 			for (var j = 0; j < checkedDays.length; j++){
+// 				if (checkedDays[j].checked === true && checkedDays[j] === allDays[i]){
+// 					continue;
+// 				} else {
+// 					checkedDays.push(allDays[i]);
+// 				}
+// 			}
+// 		} else if (allDays[i].checked === false){
+// 			checkedDays.splice(i, 1);
+// 		}
+// 	}
+// }
+
+function checkDay () {
+	for (var i = 0; i < allDays.length; i++){
+		if (checkedDays.length && allDays[i].checked){
+			for (var j = 0; j < checkedDays.length; j++) {
+				if (allDays[i] === checkedDays[j]){
+					continue;
+				} else {
+					checkedDays.push(allDays[i]);
+				}
+			}
+		} else if (allDays[i].checked) {
 			checkedDays.push(allDays[i]);
-		} else if (allDays[i].checked === false){
-			checkedDays.splice(i, 1);
 		}
 	}
 }
 
+
 //start alarm if current time === set alarm
 setInterval (function(){ 
 	checkDay();
+
 	for (var i=0; i < checkedDays.length; i++){
 		if (checkedDays[i].value === currentDay){
 			if (startTime() === setAlarm()){
