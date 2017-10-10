@@ -168,7 +168,7 @@ setInterval (function(){
 	for (var i=0; i < checkedDays.length; i++){
 		if (checkedDays[i].value === currentDay){
 			if (startTime() === setAlarm()){
-			alarm();
+				alarm();
 			}
 		}
 	}
