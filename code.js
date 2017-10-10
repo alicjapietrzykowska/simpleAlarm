@@ -190,6 +190,9 @@ function checkDay (){
 			if (checkedDays.includes(allDays[i])){
 				checkedDays.splice(checkedDays.indexOf(allDays[i]), 1);
 			}
+		}
+	}
+}
 
 //start alarm if current time === set alarm
 setInterval (function(){ 
