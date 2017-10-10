@@ -27,20 +27,30 @@
 
 		<fieldset>
 		  <legend>W jakie dni tygodnia zadzwonic?</legend>
-		  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon">
+		  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon" class="weekdays">
 		  <label for="check_mon">Poniedziałek</label>
-		  <input type="checkbox" name="day" value="Wtorek" id="check_tue">
+		  <input type="checkbox" name="day" value="Wtorek" id="check_tue" class="weekdays">
 		  <label for="check_tue">Wtorek</label>
-		  <input type="checkbox" name="day" value="Środa" id="check_wed">
+		  <input type="checkbox" name="day" value="Środa" id="check_wed" class="weekdays">
 		  <label for="check_wed">Środa</label>
-		  <input type="checkbox" name="day" value="Czwartek" id="check_thu">
+		  <input type="checkbox" name="day" value="Czwartek" id="check_thu" class="weekdays">
 		  <label for="check_thu">Czwartek</label>
-			<input type ="checkbox" name="day" value="Piatek" id="check_fri">
+			<input type ="checkbox" name="day" value="Piatek" id="check_fri" class="weekdays">
 		  <label for ="check_fri">Piatek</label>
-		  <input type="checkbox" name="day" value="Sobota" id="check_sat">
+		  <input type="checkbox" name="day" value="Sobota" id="check_sat" class="weekend">
 		  <label for="check_sat">Sobota</label>
-		  <input type="checkbox" name="day" value="Niedziela" id="check_sun">
+		  <input type="checkbox" name="day" value="Niedziela" id="check_sun" class="weekend">
 		  <label for="check_sun">Niedziela</label>
+		</fieldset>
+
+		<fieldset>
+			<legend>Masowe zaznaczanie</legend>
+			<input type="checkbox" name="fewDays" id="allWeek">
+			<label for="allWeek">Cały tydzien</label>
+			<input type="checkbox" name="fewDays" id="weekdays">
+			<label for="weekdays">Dni powszednie</label>
+			<input type="checkbox" name="fewDays" id="weekend">
+			<label for="weekend">Weekend</label>
 		</fieldset>
 
 		<p id="alarmDays"></p>
