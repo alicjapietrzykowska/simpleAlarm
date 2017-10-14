@@ -1,6 +1,7 @@
 var alarmDays = document.querySelector("#alarmDays");
 var inputHour = document.getElementById("setHour");
 var inputMinute = document.getElementById("setMinute");
+var setAlarmBtn = document.getElementById("setAlarmBtn");
 var alarmSecond = "00";
 
 //Default nap status
@@ -11,6 +12,16 @@ var napTimeValue = 5;
 var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
 var date = new Date();
 var currentDay = days[date.getDay()];
+
+var called = false;
+setAlarmBtn.addEventListener("click", function(){
+	if (called){
+		stopWaiting();
+	} else {
+		waitForAlarm();
+	}
+});
+
 
 //function to add "0" to inputted time if it has only one digit
 function checkTime(i){
@@ -38,26 +49,26 @@ function startTime (){
 //After load a page start clock
 window.onload = startTime();
 
-inputHour.addEventListener("input", setAlarm);
-inputMinute.addEventListener("input", setAlarm);
+// inputHour.addEventListener("input", setAlarm);
+// inputMinute.addEventListener("input", setAlarm);
 
 function setAlarm (){
-	var formattedHour = inputHour.value || "0";
-	var formattedMinute = inputMinute.value || "0";
+	var formattedHour = inputHour.value;
+	var formattedMinute = inputMinute.value;
 	formattedHour = checkTime(formattedHour);
 	formattedHour = formattedHour || "00";
 	formattedMinute = formattedMinute || "00";
 	// set nap if nap === true
-	if (nap === true){
-		formattedMinute = parseFloat(formattedMinute) + napTimeValue;
-		if (formattedMinute > 59){
-			formattedHour = parseFloat(formattedHour) + 1;
-			formattedMinute = String(formattedMinute).charAt(1);
-		}
-		inputHour.value = formattedHour;
-		inputMinute.value = formattedMinute;
-		nap = false;
-	}
+	// if (nap === true){
+	// 	formattedMinute = parseFloat(formattedMinute) + napTimeValue;
+	// 	if (formattedMinute > 59){
+	// 		formattedHour = parseFloat(formattedHour) + 1;
+	// 		formattedMinute = String(formattedMinute).charAt(1);
+	// 	}
+	// 	inputHour.value = formattedHour;
+	// 	inputMinute.value = formattedMinute;
+	// 	nap = false;
+	// }
 	formattedMinute = checkTime(formattedMinute);
 	var alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
 	document.getElementById("alarmTime").innerHTML = alarmTime;
@@ -132,6 +143,47 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
     }
 });
 
+
+//functions for arrows
+var increaseHour = document.querySelector("#increaseHour");
+var increaseMinute = document.querySelector("#increaseMinute");
+var reduceHour = document.querySelector("#reduceHour");
+var reduceMinute = document.querySelector("#reduceMinute");
+
+
+increaseHour.addEventListener("mousedown", function(){
+	if (inputHour.value == 23){
+		inputHour.value = "00";
+	} else {
+		inputHour.value = parseFloat(inputHour.value) + 1;
+	}
+});
+
+increaseMinute.addEventListener("click", function(){
+	if (inputMinute.value == 59){
+		inputMinute.value = "00";
+	} else {
+		inputMinute.value = parseFloat(inputMinute.value) + 1;
+	}
+});
+
+reduceHour.addEventListener("click", function(){
+	if (inputHour.value == 0){
+		inputHour.value = "23";
+	} else {
+		inputHour.value = parseFloat(inputHour.value) - 1;
+	}
+});
+
+reduceMinute.addEventListener("click", function(){
+	if (inputMinute.value == 00){
+		inputMinute.value = "59";
+	} else {
+		inputMinute.value = parseFloat(inputMinute.value) - 1;
+	}
+});
+
+
 //check day to set alarm
 var allDays = document.getElementsByName("day");
 var fewDays = document.getElementsByName("fewDays");
@@ -192,17 +244,32 @@ function checkDay (){
 			}
 		}
 	}
-}
+};
+
 
 //start alarm if current time === set alarm
-setInterval (function(){ 
-	checkDay();
-
-	for (var i=0; i < checkedDays.length; i++){
-		if (checkedDays[i].value === currentDay){
-			if (startTime() === setAlarm()){
-				alarm();
+function waitForAlarm (){
+	console.log("klik!");
+	setAlarmBtn.style.backgroundColor = '#6d60a5';
+	setAlarmBtn.innerHTML = "Zatrzymaj budzik";
+	called = setInterval (function(){
+		checkDay();
+		for (var i=0; i < checkedDays.length; i++){
+			if (checkedDays[i].value === currentDay){
+				if (startTime() === setAlarm()){
+					alarm();
+				}
 			}
 		}
-	}
-}, 1000);
+	}, 1000);
+}
+
+function stopWaiting(){
+		console.log("stop!");
+		clearInterval(called);
+		checkedDays.length = 0;
+		setAlarmBtn.style.backgroundColor = '#392D75';
+		setAlarmBtn.innerHTML = "Ustaw budzik";
+		called = false;
+		return;
+}

@@ -1,10 +1,145 @@
+body {
+  font-family: 'Arial', sans-serif; }
+
 .wrapper {
   margin: 50px auto;
-  padding: 20px;
   width: 50%;
   background: linear-gradient(to top, #6d61a5 20%, #392d75 100%);
   border: 2px solid #eee;
   border-radius: 10px; }
+
+#currentTime {
+  color: white; }
+
+#setAlarmDiv {
+  text-align: center; }
+
+.inputAlarmTime {
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  font-size: 36pt;
+  width: 60px; }
+
+#setHour {
+  text-align: right; }
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+.chooseAlarmTime {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px; }
+
+.hourDiv, .minuteDiv {
+  display: flex;
+  flex-direction: column; }
+  .hourDiv button, .minuteDiv button {
+    background: none;
+    border: none; }
+  .hourDiv .fa, .minuteDiv .fa {
+    cursor: pointer;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.5); }
+
+.optionsDiv {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 20px 0; }
+
+fieldset {
+  border: none; }
+
+input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  top: -20px; }
+
+.days input:checked + span {
+  background-color: #c6c6c6; }
+
+.days label {
+  display: inline-flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  margin: 0 5px;
+  background-color: #C9C7DC;
+  border: solid #6D60A5 3px;
+  color: #3A3261;
+  font-weight: bold;
+  cursor: pointer; }
+  .days label:hover, .days label:focus {
+    background-color: #dadada; }
+  .days label.chosenDay {
+    border: solid #6D60A5 3px;
+    background-color: #6D60A5; }
+    .days label.chosenDay:hover, .days label.chosenDay:focus {
+      background-color: #605CA8;
+      border: solid #6D60A5 3px; }
+  .days label span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%; }
+
+.fewDays input:checked + span {
+  background-color: #c6c6c6;
+  height: 100%; }
+
+.fewDays label {
+  display: inline-flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  background-color: #6d60a5;
+  border: solid #6D60A5 3px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: lowercase;
+  width: 150px;
+  height: 40px;
+  cursor: pointer; }
+  .fewDays label:hover, .fewDays label:focus {
+    background-color: #dadada; }
+  .fewDays label.chosenDay {
+    border: solid #6D60A5 3px;
+    background-color: #6D60A5; }
+    .fewDays label.chosenDay:hover, .fewDays label.chosenDay:focus {
+      background-color: #605CA8;
+      border: solid #6D60A5 3px; }
+  .fewDays label span {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 5px; }
+
+#setAlarmBtn {
+  width: 80%;
+  padding: 20px;
+  background-color: #392D75;
+  border: 2px #605CA8 solid;
+  color: #ffffff;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer; }
+  #setAlarmBtn:hover, #setAlarmBtn:focus {
+    background-color: #6D60A5; }
 
 #alarmDiv {
   display: none; }
