@@ -64,7 +64,12 @@ input[type=checkbox] {
   top: -20px; }
 
 .days input:checked + span {
-  background-color: #c6c6c6; }
+  background-color: #392D75;
+  color: #ffffff; }
+
+.days input:checked + span:hover {
+  background-color: #dadada;
+  color: #392D75; }
 
 .days label {
   display: inline-flex;
@@ -83,7 +88,7 @@ input[type=checkbox] {
     background-color: #dadada; }
   .days label.chosenDay {
     border: solid #6D60A5 3px;
-    background-color: #6D60A5; }
+    background-color: #392D75; }
     .days label.chosenDay:hover, .days label.chosenDay:focus {
       background-color: #605CA8;
       border: solid #6D60A5 3px; }

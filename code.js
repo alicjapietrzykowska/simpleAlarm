@@ -4,6 +4,13 @@ var inputMinute = document.getElementById("setMinute");
 var setAlarmBtn = document.getElementById("setAlarmBtn");
 var alarmSecond = "00";
 
+//variables to change alarm time by arrows
+var arrows = document.getElementsByClassName("fa");
+var increaseHour = document.querySelector("#increaseHour");
+var increaseMinute = document.querySelector("#increaseMinute");
+var reduceHour = document.querySelector("#reduceHour");
+var reduceMinute = document.querySelector("#reduceMinute");
+
 //Default nap status
 var nap = false;
 var napTimeValue = 5;
@@ -13,6 +20,7 @@ var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','S
 var date = new Date();
 var currentDay = days[date.getDay()];
 
+//listen to setAlarmBtn to start main functions
 var called = false;
 setAlarmBtn.addEventListener("click", function(){
 	if (called){
@@ -25,7 +33,14 @@ setAlarmBtn.addEventListener("click", function(){
 
 //function to add "0" to inputted time if it has only one digit
 function checkTime(i){
-	if (i < 10){
+
+	if (i[0] == 0){
+		return i;
+	} 
+	else if (i == 0 || i == 00){
+		return "00";
+	}
+	else if (i < 10){
 		return "0" + i;
 	} else {
 		return i;
@@ -38,6 +53,7 @@ function startTime (){
 	var hours = date.getHours();
 	var minutes = date.getMinutes();
 	var seconds = date.getSeconds();
+	hours = checkTime(hours);
 	minutes = checkTime(minutes);
 	seconds = checkTime(seconds);
 	var currentTime = hours + ":" + minutes + ":" + seconds;
@@ -49,29 +65,27 @@ function startTime (){
 //After load a page start clock
 window.onload = startTime();
 
-// inputHour.addEventListener("input", setAlarm);
-// inputMinute.addEventListener("input", setAlarm);
-
 function setAlarm (){
 	var formattedHour = inputHour.value;
 	var formattedMinute = inputMinute.value;
+
 	formattedHour = checkTime(formattedHour);
-	formattedHour = formattedHour || "00";
-	formattedMinute = formattedMinute || "00";
+	inputHour.value = formattedHour;
 	// set nap if nap === true
-	// if (nap === true){
-	// 	formattedMinute = parseFloat(formattedMinute) + napTimeValue;
-	// 	if (formattedMinute > 59){
-	// 		formattedHour = parseFloat(formattedHour) + 1;
-	// 		formattedMinute = String(formattedMinute).charAt(1);
-	// 	}
-	// 	inputHour.value = formattedHour;
-	// 	inputMinute.value = formattedMinute;
-	// 	nap = false;
-	// }
+	if (nap === true){
+		formattedMinute = parseFloat(formattedMinute) + napTimeValue;
+		if (formattedMinute > 59){
+			formattedHour = parseFloat(formattedHour) + 1;
+			formattedMinute = String(formattedMinute).charAt(1);
+		}
+		inputHour.value = formattedHour;
+		inputMinute.value = formattedMinute;
+		nap = false;
+	}
 	formattedMinute = checkTime(formattedMinute);
+	inputMinute.value = formattedMinute;
 	var alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
-	document.getElementById("alarmTime").innerHTML = alarmTime;
+	// document.getElementById("alarmTime").innerHTML = alarmTime;
 	return alarmTime;
 }
 
@@ -145,10 +159,6 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
 
 
 //functions for arrows
-var increaseHour = document.querySelector("#increaseHour");
-var increaseMinute = document.querySelector("#increaseMinute");
-var reduceHour = document.querySelector("#reduceHour");
-var reduceMinute = document.querySelector("#reduceMinute");
 
 
 increaseHour.addEventListener("mousedown", function(){
@@ -156,7 +166,9 @@ increaseHour.addEventListener("mousedown", function(){
 		inputHour.value = "00";
 	} else {
 		inputHour.value = parseFloat(inputHour.value) + 1;
+		checkTime(inputHour.value);
 	}
+	setAlarm();
 });
 
 increaseMinute.addEventListener("click", function(){
@@ -164,7 +176,9 @@ increaseMinute.addEventListener("click", function(){
 		inputMinute.value = "00";
 	} else {
 		inputMinute.value = parseFloat(inputMinute.value) + 1;
+		checkTime(inputMinute.value);
 	}
+	setAlarm();
 });
 
 reduceHour.addEventListener("click", function(){
@@ -172,7 +186,9 @@ reduceHour.addEventListener("click", function(){
 		inputHour.value = "23";
 	} else {
 		inputHour.value = parseFloat(inputHour.value) - 1;
+		checkTime(inputHour.value);
 	}
+	setAlarm();
 });
 
 reduceMinute.addEventListener("click", function(){
@@ -180,7 +196,9 @@ reduceMinute.addEventListener("click", function(){
 		inputMinute.value = "59";
 	} else {
 		inputMinute.value = parseFloat(inputMinute.value) - 1;
+		checkTime(inputMinute.value);
 	}
+	setAlarm();
 });
 
 
@@ -252,6 +270,20 @@ function waitForAlarm (){
 	console.log("klik!");
 	setAlarmBtn.style.backgroundColor = '#6d60a5';
 	setAlarmBtn.innerHTML = "Zatrzymaj budzik";
+	inputHour.disabled = true;
+	inputMinute.disabled = true;
+	for (var i = 0; i< arrows.length; i++){
+		arrows[i].style.opacity = "0";
+		arrows[i].setAttribute("aria-hidden", "true");
+		arrows[i].disabled = true;
+		arrows[i].style.cursor = "default";
+	};
+	for (var i = 0; i < allDays.length; i++){
+		allDays[i].disabled = true;
+	};
+	for (var i = 0; i < fewDays.length; i++){
+		fewDays[i].disabled = true;
+	};
 	called = setInterval (function(){
 		checkDay();
 		for (var i=0; i < checkedDays.length; i++){
@@ -265,11 +297,25 @@ function waitForAlarm (){
 }
 
 function stopWaiting(){
-		console.log("stop!");
-		clearInterval(called);
-		checkedDays.length = 0;
-		setAlarmBtn.style.backgroundColor = '#392D75';
-		setAlarmBtn.innerHTML = "Ustaw budzik";
-		called = false;
-		return;
+	console.log("stop!");
+	clearInterval(called);
+	checkedDays.length = 0;
+	setAlarmBtn.style.backgroundColor = '#392D75';
+	inputHour.disabled = false;
+	inputMinute.disabled = false;
+	for(var i = 0; i< arrows.length; i++){
+		arrows[i].style.opacity = "1";
+		arrows[i].removeAttribute("aria-hidden");
+		arrows[i].disabled = false;
+		arrows[i].style.cursor = "pointer";
+	};
+	for (var i = 0; i < allDays.length; i++){
+		allDays[i].disabled = false;
+	};
+	for (var i = 0; i < fewDays.length; i++){
+		fewDays[i].disabled = false;
+	};
+	setAlarmBtn.innerHTML = "Ustaw budzik";
+	called = false;
+	return;
 }

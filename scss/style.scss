@@ -86,7 +86,13 @@ input[type=checkbox] {
 
 .days {
 	input:checked + span {
-	    background-color: #c6c6c6;
+	    background-color: #392D75;
+	    color: #ffffff;
+	}
+	
+	input:checked + span:hover {
+	    background-color: #dadada;
+	    color: #392D75;
 	}
 
 	label {
@@ -109,7 +115,7 @@ input[type=checkbox] {
 
 		&.chosenDay {
 			border: solid #6D60A5 3px;
-			background-color: #6D60A5;
+			background-color: #392D75;
 			
 			&:hover, &:focus{
 				background-color: #605CA8;
