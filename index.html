@@ -3,6 +3,8 @@
 
 <head>
 	<meta charset="utf-8">
+		<script src="https://use.fontawesome.com/2ba0d7112c.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Simple Alarm!</title>
 </head>
@@ -13,16 +15,15 @@
 		<div class="chooseAlarmTime">
 			<div class="hourDiv">
 				<button class="fa fa-caret-up" id="increaseHour"></button>
-				<input class="inputAlarmTime" type="number" value="00" min="00" max="23" id="setHour">
+				<input class="inputAlarmTime" value="00" id="setHour">
 				<button class="fa fa-caret-down" id="reduceHour"></button>
 			</div>
 				<span class="inputAlarmTime">:</span>
 			<div class="minuteDiv">
 				<button class="fa fa-caret-up" id="increaseMinute"></button>
-				<input class="inputAlarmTime" value="00"  min="00" max="59" id="setMinute">
+				<input class="inputAlarmTime" value="00" id="setMinute">
 				<button class="fa fa-caret-down" id="reduceMinute"></button>
 			</div>
-<!-- 			<p id="alarmTime"></p> -->
 		</div>
 		<div class="optionsDiv">
 			<fieldset class="days">
@@ -76,18 +77,22 @@
 	</div>
 	
 	<div class="wrapper" id="alarmDiv">
-		<button id="napBtn">Drzemka 5 minut</button>
-		<button id ="stopBtn">Wyłacz budzik</button>
+			<span class="fa fa-bell"></span>
+			<p class="alarmSign">Budzik</p>
+			<p id="alarmTime"></p>
+			<div class="napDiv">
+				<button id="napBtn">Drzemka 
+				5 minut</button>
+				<button id ="stopBtn">Wyłacz budzik</button>
+			</div>
 	</div>
 
 
-		<audio id="music">
+		<audio loop id="music">
 		  <source src="Chat Noir Theme.ogg" type="audio/ogg">
 		  <p>Your browser doesn't support HTML5 audio.</p>
 		</audio>
 </body>
 
-
-<script src="https://use.fontawesome.com/2ba0d7112c.js"></script>
 <script src ="code.js"></script>
 </html>

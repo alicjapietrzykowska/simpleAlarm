@@ -30,14 +30,57 @@ setAlarmBtn.addEventListener("click", function(){
 	}
 });
 
+//functions for arrows
+
+
+increaseHour.addEventListener("mousedown", function(){
+	if (inputHour.value == 23){
+		inputHour.value = "00";
+	} else {
+		inputHour.value = parseFloat(inputHour.value) + 1;
+		inputHour.value = checkTime(inputHour.value);
+	}
+	// setAlarm();
+});
+
+increaseMinute.addEventListener("click", function(){
+	if (inputMinute.value == 59){
+		inputMinute.value = "00";
+	} else {
+		inputMinute.value = parseFloat(inputMinute.value) + 1;
+		inputMinute.value = checkTime(inputMinute.value);
+	}
+	// setAlarm();
+});
+
+reduceHour.addEventListener("click", function(){
+	if (inputHour.value == 0){
+		inputHour.value = "23";
+	} else {
+		inputHour.value = parseFloat(inputHour.value) - 1;
+		inputHour.value = checkTime(inputHour.value);
+	}
+	// setAlarm();
+});
+
+reduceMinute.addEventListener("click", function(){
+	if (inputMinute.value == 00){
+		inputMinute.value = "59";
+	} else {
+		inputMinute.value = parseFloat(inputMinute.value) - 1;
+		inputMinute.value = checkTime(inputMinute.value);
+	}
+});
+
 
 //function to add "0" to inputted time if it has only one digit
 function checkTime(i){
 
-	if (i[0] == 0){
-		return i;
-	} 
-	else if (i == 0 || i == 00){
+	// if (i[0] == 0){
+	// 	return i;
+	// } 
+	// else 
+		if (i == 0 || i == 00){
 		return "00";
 	}
 	else if (i < 10){
@@ -85,7 +128,7 @@ function setAlarm (){
 	formattedMinute = checkTime(formattedMinute);
 	inputMinute.value = formattedMinute;
 	var alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
-	// document.getElementById("alarmTime").innerHTML = alarmTime;
+	document.getElementById("alarmTime").innerHTML = formattedHour + ":" + formattedMinute;
 	return alarmTime;
 }
 
@@ -156,51 +199,6 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
         evt.preventDefault();
     }
 });
-
-
-//functions for arrows
-
-
-increaseHour.addEventListener("mousedown", function(){
-	if (inputHour.value == 23){
-		inputHour.value = "00";
-	} else {
-		inputHour.value = parseFloat(inputHour.value) + 1;
-		checkTime(inputHour.value);
-	}
-	setAlarm();
-});
-
-increaseMinute.addEventListener("click", function(){
-	if (inputMinute.value == 59){
-		inputMinute.value = "00";
-	} else {
-		inputMinute.value = parseFloat(inputMinute.value) + 1;
-		checkTime(inputMinute.value);
-	}
-	setAlarm();
-});
-
-reduceHour.addEventListener("click", function(){
-	if (inputHour.value == 0){
-		inputHour.value = "23";
-	} else {
-		inputHour.value = parseFloat(inputHour.value) - 1;
-		checkTime(inputHour.value);
-	}
-	setAlarm();
-});
-
-reduceMinute.addEventListener("click", function(){
-	if (inputMinute.value == 00){
-		inputMinute.value = "59";
-	} else {
-		inputMinute.value = parseFloat(inputMinute.value) - 1;
-		checkTime(inputMinute.value);
-	}
-	setAlarm();
-});
-
 
 //check day to set alarm
 var allDays = document.getElementsByName("day");

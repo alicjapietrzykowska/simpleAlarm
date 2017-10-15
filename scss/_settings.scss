@@ -3,4 +3,18 @@ $up769: "only screen and (min-width: 769px)";
 $up1024: "only screen and (min-width: 1024px)";
 $up1280: "only screen and (min-width: 1280px))"; 
 
-$daysColor: #3A3261;
+$textColor: #3A3261;
+$darkestColor: #392D75;
+$middleColor: #6d60a5;
+$brightestColor: #C9C7DC;
+$brightestGrey: #dadada;
+
+@mixin delayColor {
+	-webkit-transition: background-color 0.3s; 
+	transition: background-color 0.3s;
+}
+
+@mixin quickerDelayColor {
+	-webkit-transition: background-color 0.1s; 
+	transition: background-color 0.1s;
+}

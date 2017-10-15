@@ -1,13 +1,13 @@
 @import "settings";
 
 body {
-	font-family: 'Arial', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .wrapper {
 	margin: 50px auto;
 	width: 50%;
-	background: linear-gradient(to top,#6d61a5 20%, #392d75 100%);
+	background: linear-gradient(to top,#6d61a5 20%, $darkestColor 100%);
 	border: 2px solid #eee;
 	border-radius: 10px;
 }
@@ -18,6 +18,7 @@ body {
 
 #setAlarmDiv {
 	text-align: center;
+	// display: none;
 }
 
 
@@ -86,13 +87,15 @@ input[type=checkbox] {
 
 .days {
 	input:checked + span {
-	    background-color: #392D75;
+	    background-color: $darkestColor;
 	    color: #ffffff;
+	    @include quickerDelayColor;
 	}
 	
 	input:checked + span:hover {
-	    background-color: #dadada;
-	    color: #392D75;
+	    background-color: $brightestGrey;
+	    color: $darkestColor;
+	    @include delayColor;
 	}
 
 	label {
@@ -103,24 +106,20 @@ input[type=checkbox] {
 		width: 55px;
 		height: 55px;
 		margin: 0 5px;
-		background-color: #C9C7DC;
-		border: solid #6D60A5 3px;
-		color: $daysColor;
+		background-color: $brightestColor;
+		border: solid $middleColor 3px;
+		color: $textColor;
 		font-weight: bold;
 		cursor: pointer;
 
-		&:hover, &:focus{
-			background-color: #dadada;
+		&:hover {
+			background-color: $brightestGrey;
+			@include delayColor;
 		}
 
-		&.chosenDay {
-			border: solid #6D60A5 3px;
-			background-color: #392D75;
-			
-			&:hover, &:focus{
-				background-color: #605CA8;
-				border: solid #6D60A5 3px;
-			}
+		&:focus {
+			background-color: $darkestColor;
+			@include delayColor;
 		}
 
 		span {	
@@ -136,9 +135,18 @@ input[type=checkbox] {
 
 .fewDays {
 	input:checked + span {
-	    background-color: #c6c6c6;
+	    background-color: $darkestColor;
 	    height: 100%;
+	    @include delayColor;
 	}
+
+	input:checked + span:hover {
+	    background-color: #2a2156;
+	    color: #darkestColor;
+	    height: 100%;
+	    @include delayColor;
+	}
+
 
 	label {
 		display: inline-flex;
@@ -146,8 +154,7 @@ input[type=checkbox] {
 		justify-content: center;
 		align-items: center;
 		margin: 0 5px;
-		background-color: #6d60a5;
-		border: solid #6D60A5 3px;
+		background-color: $middleColor;
 		color: #ffffff;;
 		font-weight: bold;
 		text-transform: lowercase;
@@ -156,17 +163,9 @@ input[type=checkbox] {
 		cursor: pointer;
 
 		&:hover, &:focus{
-			background-color: #dadada;
-		}
-
-		&.chosenDay {
-			border: solid #6D60A5 3px;
-			background-color: #6D60A5;
-			
-			&:hover, &:focus{
-				background-color: #605CA8;
-				border: solid #6D60A5 3px;
-			}
+			background-color: #4F438A;
+			color: #ffffff;
+			@include delayColor;
 		}
 
 		span {	
@@ -174,6 +173,7 @@ input[type=checkbox] {
 			    width: 100%;
 			    height: 100%;
 			    padding: 5px;
+
 			}
 	}
 }
@@ -182,7 +182,7 @@ input[type=checkbox] {
 #setAlarmBtn {
 	width: 80%;
 	padding: 20px;
-	background-color: #392D75;
+	background-color: $darkestColor;
 	border: 2px #605CA8 solid;
 	color: #ffffff;
 	font-size: 14pt;
@@ -192,10 +192,56 @@ input[type=checkbox] {
 	cursor: pointer;
 
 	&:hover, &:focus {
-		background-color: #6D60A5;
+		background-color: $middleColor;
 	}
 }
 
 #alarmDiv {
-	display: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.fa-bell {
+	color: rgba(255,255,255, 0.6);
+	font-size: 80pt;
+	padding: 60px 0 30px;
+}
+
+.alarmSign {
+	text-transform: uppercase;
+	color: #ffffff;
+}
+
+#alarmTime {
+	color: #ffffff;
+	font-size: 48pt;
+	margin: 0;
+}
+
+.napDiv {
+	#napBtn {
+		display: inline-flex;
+		box-sizing: border-box;
+		justify-content: center;
+		align-items: center;
+		margin: 0 5px;
+		padding: 20px 30px;
+		background-color: $brightestColor;
+		color: $textColor;
+		border: 2px $darkestColor solid;
+		font-weight: bold;
+		font-size: 12pt;
+		text-transform: uppercase;
+		cursor: pointer;
+		// white-space: pre;
+
+		&:hover, &:focus{
+			background-color: #4F438A;
+			color: #ffffff;
+			@include delayColor;
+		}
+	}
 }
