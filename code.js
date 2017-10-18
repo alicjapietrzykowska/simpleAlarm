@@ -203,17 +203,6 @@ weekend.addEventListener('click', function(){
 // 		}
 // 	}
 // };
-<<<<<<< HEAD
-
-// function checkDay (){
-// 	for (var i = 0; i < allDays.length; i++) {
-// 		if (allDays[i].checked){
-// 			checkedDays.push(allDays[i]);
-// 		} else if (allDays[i].checked === false){
-// 			checkedDays.splice(i, 1);
-// 		}
-// 	}
-// }
 
 function checkDay (){
 	for (var i = 0; i < allDays.length; i++) {
@@ -226,14 +215,6 @@ function checkDay (){
 			if (checkedDays.includes(allDays[i])){
 				checkedDays.splice(checkedDays.indexOf(allDays[i]), 1);
 			}
-=======
-function checkDay (){
-	for (var i = 0; i < allDays.length; i++) {
-		if (allDays[i].checked){
-			checkedDays.push(allDays[i]);
-		} else if (allDays[i].checked === false){
-			checkedDays.splice(i, 1);
->>>>>>> 88593375900a89c7c3189c569fb4841bcf0cdf27
 		}
 	}
 }
