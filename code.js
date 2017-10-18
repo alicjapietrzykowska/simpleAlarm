@@ -76,13 +76,13 @@ reduceMinute.addEventListener("click", function(){
 //function to add "0" to inputted time if it has only one digit
 function checkTime(i){
 
-	// if (i[0] == 0){
-	// 	return i;
-	// } 
 	// else 
-		if (i == 0 || i == 00){
+	if (i == 0 || i == 00){
 		return "00";
-	}
+	}else if (i[0] == 0){
+		i = i.slice(0,2);
+		return i;
+	} 
 	else if (i < 10){
 		return "0" + i;
 	} else {
