@@ -3,61 +3,102 @@
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://use.fontawesome.com/2ba0d7112c.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Simple Alarm!</title>
 </head>
 
 <body>
-	<div class="wrapper">
-		<h1>Ustaw budzik!</h1>
-		<p id="currentTime"></p>
-		<input class="input" type="number" min="00" max="23" id="setHour">
-		<input class="input" type="number" min="00" max="59" id="setMinute">
-		<p id="alarmTime"></p>
-		<img id="imgAlarm" src="http://clinicalengineering.in/wp-content/uploads/2014/01/alarm.jpg"></img>
+	<div class="wrapper" id="setAlarmDiv">
+	<p id="currentTime"></p>
+		<div class="chooseAlarmTime">
+			<div class="hourDiv">
+				<button class="fa fa-caret-up arrow" id="increaseHour"></button>
+				<input class="inputAlarmTime" value="00" id="setHour">
+				<button class="fa fa-caret-down arrow" id="reduceHour"></button>
+			</div>
+				<span class="inputAlarmTime">:</span>
+			<div class="minuteDiv">
+				<button class="fa fa-caret-up arrow" id="increaseMinute"></button>
+				<input class="inputAlarmTime" value="00" id="setMinute">
+				<button class="fa fa-caret-down arrow" id="reduceMinute"></button>
+			</div>
+		</div>
+		<div class="optionsDiv">
+			<fieldset class="days">
+ 				<label for="check_mon">
+					  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon" class="weekdays">
+					  <span>Pn</span>
+				 </label>
+				<label for="check_tue">
+				  <input type="checkbox" name="day" value="Wtorek" id="check_tue" class="weekdays">
+					<span>Wt</span>
+				</label>
+				<label for="check_wed">
+				  <input type="checkbox" name="day" value="Środa" id="check_wed" class="weekdays">
+					<span>Śr</span>
+				</label>
+				<label for="check_thu">
+				  <input type="checkbox" name="day" value="Czwartek" id="check_thu" class="weekdays">
+					<span>Czw</span>
+				</label>
+				<label for ="check_fri">
+					<input type ="checkbox" name="day" value="Piatek" id="check_fri" class="weekdays">
+					<span>Pt</span>
+				</label>
+				<label for="check_sat">
+				  <input type="checkbox" name="day" value="Sobota" id="check_sat" class="weekend">
+					<span>So</span>
+				</label>
+				<label for="check_sun">
+				  <input type="checkbox" name="day" value="Niedziela" id="check_sun" class="weekend">
+					<span>Nd</span>
+				</label>
+			</fieldset>
 
-		<audio id="music">
+			<fieldset class="fewDays">
+				<label for="allWeek">
+					<input type="checkbox" name="fewDays" id="allWeek">
+					<span>Codziennie</span>
+				</label>
+				<label for="weekdays">
+					<input type="checkbox" name="fewDays" id="weekdays">
+					<span>Dni powszednie</span>
+				</label>
+				<label for="weekend">
+					<input type="checkbox" name="fewDays" id="weekend">
+					<span>Weekend</span>
+				</label>
+			</fieldset>
+
+				<button id="setAlarmBtn">Ustaw budzik</button>
+			</div>
+	</div>
+	
+	<div class="wrapper" id="alarmDiv">
+			<span class="fa fa-bell"></span>
+			<p class="alarmSign">Budzik</p>
+			<p id="alarmTime"></p>
+			<div class="napDiv">
+				<button id="napFive">Drzemka 
+				5 minut</button>
+				<button id ="stopBtn">Wyłącz budzik</button>
+				<div class="napButtons">
+					<button id="napThree">3 min</button>
+					<button id="napTen">10 min</button>
+					<button id="napFifteen">15 min</button>
+					<button id="napTwenty">20 min</button>
+				</div>
+			</div>
+
+	</div>
+
+
+		<audio loop id="music">
 		  <source src="Chat Noir Theme.ogg" type="audio/ogg">
 		  <p>Your browser doesn't support HTML5 audio.</p>
 		</audio>
-
-		<button id="napBtn">Drzemka 5 minut</button>
-		<button id ="stopBtn">Wyłacz budzik</button>
-
-
-		<fieldset>
-		  <legend>W jakie dni tygodnia zadzwonic?</legend>
-		  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon" class="weekdays">
-		  <label for="check_mon">Poniedziałek</label>
-		  <input type="checkbox" name="day" value="Wtorek" id="check_tue" class="weekdays">
-		  <label for="check_tue">Wtorek</label>
-		  <input type="checkbox" name="day" value="Środa" id="check_wed" class="weekdays">
-		  <label for="check_wed">Środa</label>
-		  <input type="checkbox" name="day" value="Czwartek" id="check_thu" class="weekdays">
-		  <label for="check_thu">Czwartek</label>
-			<input type ="checkbox" name="day" value="Piatek" id="check_fri" class="weekdays">
-		  <label for ="check_fri">Piatek</label>
-		  <input type="checkbox" name="day" value="Sobota" id="check_sat" class="weekend">
-		  <label for="check_sat">Sobota</label>
-		  <input type="checkbox" name="day" value="Niedziela" id="check_sun" class="weekend">
-		  <label for="check_sun">Niedziela</label>
-		</fieldset>
-
-		<fieldset>
-			<legend>Masowe zaznaczanie</legend>
-			<input type="checkbox" name="fewDays" id="allWeek">
-			<label for="allWeek">Cały tydzien</label>
-			<input type="checkbox" name="fewDays" id="weekdays">
-			<label for="weekdays">Dni powszednie</label>
-			<input type="checkbox" name="fewDays" id="weekend">
-			<label for="weekend">Weekend</label>
-		</fieldset>
-
-		<p id="alarmDays"></p>
-		<p id="alarmDaysToRemove"></p>
-
-
-	</div>
 </body>
 
 <script src ="code.js"></script>

@@ -1,0 +1,219 @@
+body {
+  font-family: 'Open Sans', sans-serif; }
+
+.wrapper {
+  position: relative;
+  min-height: 700px;
+  margin: 30px auto;
+  width: 50%;
+  background: linear-gradient(to top, #6d61a5 20%, #392D75 100%);
+  border: 2px solid #eee;
+  border-radius: 10px; }
+
+#currentTime {
+  color: white; }
+
+#setAlarmDiv {
+  text-align: center; }
+
+.inputAlarmTime {
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  font-size: 36pt;
+  width: 60px; }
+
+#setHour {
+  text-align: right; }
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+.chooseAlarmTime {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px; }
+
+.hourDiv, .minuteDiv {
+  display: flex;
+  flex-direction: column; }
+  .hourDiv button, .minuteDiv button {
+    background: none;
+    border: none; }
+  .hourDiv .fa, .minuteDiv .fa {
+    cursor: pointer;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.5); }
+
+.optionsDiv {
+  position: absolute;
+  height: 300px;
+  bottom: 0;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 20px 0; }
+
+fieldset {
+  border: none; }
+
+input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  top: -20px; }
+
+.days input:checked + span {
+  background-color: #392D75;
+  color: #ffffff;
+  -webkit-transition: background-color 0.1s;
+  transition: background-color 0.1s; }
+
+.days input:checked + span:hover {
+  background-color: #dadada;
+  color: #392D75;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s; }
+
+.days label {
+  display: inline-flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  margin: 0 5px;
+  background-color: #C9C7DC;
+  border: solid #6d60a5 3px;
+  color: #3A3261;
+  font-weight: bold;
+  cursor: pointer; }
+  .days label:hover {
+    background-color: #dadada;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+  .days label:focus {
+    background-color: #392D75;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+  .days label span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%; }
+
+.fewDays input:checked + span {
+  background-color: #392D75;
+  height: 100%;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s; }
+
+.fewDays input:checked + span:hover {
+  background-color: #2a2156;
+  color: #darkestColor;
+  height: 100%;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s; }
+
+.fewDays label {
+  display: inline-flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  background-color: #6d60a5;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: lowercase;
+  width: 150px;
+  height: 40px;
+  cursor: pointer; }
+  .fewDays label:hover, .fewDays label:focus {
+    background-color: #4F438A;
+    color: #ffffff;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+  .fewDays label span {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 5px; }
+
+#setAlarmBtn {
+  width: 80%;
+  padding: 20px;
+  background-color: #392D75;
+  border: 2px #605CA8 solid;
+  color: #ffffff;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer; }
+  #setAlarmBtn:hover, #setAlarmBtn:focus {
+    background-color: #6d60a5; }
+
+#alarmDiv {
+  display: none;
+  padding-bottom: 20px;
+  text-align: center; }
+
+.fa-bell {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 80pt;
+  padding: 60px 0 30px; }
+
+.alarmSign {
+  text-transform: uppercase;
+  color: #ffffff; }
+
+#alarmTime {
+  color: #ffffff;
+  font-size: 48pt;
+  margin: 0; }
+
+.napDiv #napFive {
+  box-sizing: border-box;
+  margin: 0 5px;
+  padding: 20px 30px;
+  background-color: #C9C7DC;
+  color: #3A3261;
+  border: 2px #392D75 solid;
+  font-weight: bold;
+  font-size: 12pt;
+  text-transform: uppercase;
+  cursor: pointer; }
+  .napDiv #napFive:hover, .napDiv #napFive:focus {
+    background-color: #4F438A;
+    color: #ffffff;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+
+.napDiv #stopBtn {
+  box-sizing: border-box;
+  margin: 0 5px;
+  padding: 20px 30px;
+  background-color: #392D75;
+  color: #ffffff;
+  border: solid #6d60a5 3px;
+  font-weight: bold;
+  font-size: 12pt;
+  text-transform: uppercase;
+  cursor: pointer; }
+  .napDiv #stopBtn:hover, .napDiv #stopBtn:focus {
+    background-color: #4F438A;
+    color: #ffffff;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+
+.napDiv .napButtons button {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 10pt; }
