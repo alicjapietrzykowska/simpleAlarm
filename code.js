@@ -92,6 +92,10 @@ function checkTime(i){
 		return i;
 	}
 }
+var secondsHand = document.querySelector('.seconds');
+var minutesHand = document.querySelector('.minutes');
+var hoursHand = document.querySelector('.hours');
+
 
 //Function to make clock work
 function startTime (){
@@ -99,6 +103,7 @@ function startTime (){
 	var hours = date.getHours();
 	var minutes = date.getMinutes();
 	var seconds = date.getSeconds();
+	setupClock();
 	hours = checkTime(hours);
 	minutes = checkTime(minutes);
 	seconds = checkTime(seconds);
@@ -110,6 +115,15 @@ function startTime (){
 
 //After load a page start clock
 window.onload = startTime();
+
+function setupClock() {
+	var secs = date.getSeconds(), 
+		mins = (date.getMinutes() + date.getSeconds()/60) * 60 , 
+		hours = (date.getHours() + (date.getMinutes() + date.getSeconds()/60)/60) * 3600;
+	secondsHand.style.animationDelay = '-' + secs + 's';
+	minutesHand.style.animationDelay = '-' + mins + 's';
+	hoursHand.style.animationDelay = '-' + hours + 's';
+}
 
 function setAlarm (){
 	var formattedHour = inputHour.value;

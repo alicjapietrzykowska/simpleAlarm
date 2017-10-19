@@ -18,3 +18,9 @@ $brightestGrey: #dadada;
 	-webkit-transition: background-color 0.1s; 
 	transition: background-color 0.1s;
 }
+
+@mixin animation {
+	animation-name: rotate;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}

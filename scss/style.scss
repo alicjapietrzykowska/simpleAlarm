@@ -6,7 +6,7 @@ body {
 
 .wrapper {
 	position: relative;
-	min-height: 700px;
+	min-height: 800px;
 	margin: 30px auto;
 	width: 50%;
 	background: linear-gradient(to top,#6d61a5 20%, $darkestColor 100%);
@@ -23,6 +23,59 @@ body {
 	// display: none;
 }
 
+.clock {
+	margin: 20px auto;
+	width: 201px;
+	height: 201px;
+	border: 5px rgba(255,255,255, 0.5) solid;
+	border-radius: 50%;
+	transform: rotate(180deg);
+
+	.hours {
+		border: 3px solid #ffffff;
+		position: absolute;
+		height: 30%;
+		border-radius: 2px;
+		left: 100px;
+		top: 100px;
+		@include animation;
+		animation-duration: 43200s;
+	}
+
+	.minutes {
+		border: 2px solid #ffffff;
+		position: absolute;
+		height: 45%;
+		border-radius: 2px;
+		left: 100px;
+		top: 100px;
+		@include animation;
+		animation-duration: 3600s;
+	}
+	.seconds {
+		border: 2px solid $middleColor;
+		position: absolute;
+		height: 45%;
+		border-radius: 2px;
+		left: 100px;
+		top: 100px;
+		@include animation;
+		animation-duration: 60s;
+	}
+}
+
+.hand {
+	transform-origin: top center;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
 
 .inputAlarmTime {
 	background: transparent;
