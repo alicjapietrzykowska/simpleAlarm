@@ -5,7 +5,9 @@ body {
 }
 
 .wrapper {
-	margin: 50px auto;
+	position: relative;
+	min-height: 700px;
+	margin: 30px auto;
 	width: 50%;
 	background: linear-gradient(to top,#6d61a5 20%, $darkestColor 100%);
 	border: 2px solid #eee;
@@ -70,9 +72,13 @@ input[type=number] {
 
 
 .optionsDiv {
+	position: absolute;
+	height: 300px;
+	bottom: 0;
 	background-color: #ffffff;
 	width: 100%;
 	padding: 20px 0;
+
 }
 
 fieldset {
@@ -197,14 +203,12 @@ input[type=checkbox] {
 }
 
 #alarmDiv {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	display: none;
 	padding-bottom: 20px;
+	text-align: center;
 }
 
-.fa-bell {
+.fa-bell, .fa-bed {
 	color: rgba(255,255,255, 0.6);
 	font-size: 80pt;
 	padding: 60px 0 30px;
@@ -222,11 +226,8 @@ input[type=checkbox] {
 }
 
 .napDiv {
-	#napBtn {
-		display: inline-flex;
+	#napFive {
 		box-sizing: border-box;
-		justify-content: center;
-		align-items: center;
 		margin: 0 5px;
 		padding: 20px 30px;
 		background-color: $brightestColor;
@@ -242,6 +243,45 @@ input[type=checkbox] {
 			background-color: #4F438A;
 			color: #ffffff;
 			@include delayColor;
+		}
+	}
+
+	#stopBtn {
+		box-sizing: border-box;
+		margin: 0 5px;
+		padding: 20px 30px;
+		background-color: $darkestColor;
+		color: #ffffff;
+		border: solid $middleColor 3px;
+		font-weight: bold;
+		font-size: 12pt;
+		text-transform: uppercase;
+		cursor: pointer;
+		// white-space: pre;
+
+		&:hover, &:focus{
+			background-color: #4F438A;
+			color: #ffffff;
+			@include delayColor;
+		}
+	}
+
+	.napButtons {
+		button {
+			margin: 13px;
+			padding: 10px 20px;
+			background-color: $brightestColor;
+			color: $textColor;
+			border: 2px $darkestColor solid;
+			font-weight: bold;
+			font-size: 10pt;
+			text-transform: uppercase;
+
+			&:hover, &:focus{
+				background-color: #4F438A;
+				color: #ffffff;
+				@include delayColor;
+			}
 		}
 	}
 }

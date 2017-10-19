@@ -2,7 +2,9 @@ body {
   font-family: 'Open Sans', sans-serif; }
 
 .wrapper {
-  margin: 50px auto;
+  position: relative;
+  min-height: 700px;
+  margin: 30px auto;
   width: 50%;
   background: linear-gradient(to top, #6d61a5 20%, #392D75 100%);
   border: 2px solid #eee;
@@ -51,6 +53,9 @@ input[type=number] {
     color: rgba(255, 255, 255, 0.5); }
 
 .optionsDiv {
+  position: absolute;
+  height: 300px;
+  bottom: 0;
   background-color: #ffffff;
   width: 100%;
   padding: 20px 0; }
@@ -156,13 +161,11 @@ input[type=checkbox] {
     background-color: #6d60a5; }
 
 #alarmDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 20px; }
+  display: none;
+  padding-bottom: 20px;
+  text-align: center; }
 
-.fa-bell {
+.fa-bell, .fa-bed {
   color: rgba(255, 255, 255, 0.6);
   font-size: 80pt;
   padding: 60px 0 30px; }
@@ -176,11 +179,8 @@ input[type=checkbox] {
   font-size: 48pt;
   margin: 0; }
 
-.napDiv #napBtn {
-  display: inline-flex;
+.napDiv #napFive {
   box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
   margin: 0 5px;
   padding: 20px 30px;
   background-color: #C9C7DC;
@@ -190,7 +190,39 @@ input[type=checkbox] {
   font-size: 12pt;
   text-transform: uppercase;
   cursor: pointer; }
-  .napDiv #napBtn:hover, .napDiv #napBtn:focus {
+  .napDiv #napFive:hover, .napDiv #napFive:focus {
+    background-color: #4F438A;
+    color: #ffffff;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+
+.napDiv #stopBtn {
+  box-sizing: border-box;
+  margin: 0 5px;
+  padding: 20px 30px;
+  background-color: #392D75;
+  color: #ffffff;
+  border: solid #6d60a5 3px;
+  font-weight: bold;
+  font-size: 12pt;
+  text-transform: uppercase;
+  cursor: pointer; }
+  .napDiv #stopBtn:hover, .napDiv #stopBtn:focus {
+    background-color: #4F438A;
+    color: #ffffff;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+
+.napDiv .napButtons button {
+  margin: 13px;
+  padding: 10px 20px;
+  background-color: #C9C7DC;
+  color: #3A3261;
+  border: 2px #392D75 solid;
+  font-weight: bold;
+  font-size: 10pt;
+  text-transform: uppercase; }
+  .napDiv .napButtons button:hover, .napDiv .napButtons button:focus {
     background-color: #4F438A;
     color: #ffffff;
     -webkit-transition: background-color 0.3s;

@@ -17,5 +17,18 @@
     "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
-  }
+  },
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicjalukaszewska/simpleAlarm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alicjalukaszewska/simpleAlarm/issues"
+  },
+  "homepage": "https://github.com/alicjalukaszewska/simpleAlarm#readme"
 }

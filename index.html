@@ -14,15 +14,15 @@
 	<p id="currentTime"></p>
 		<div class="chooseAlarmTime">
 			<div class="hourDiv">
-				<button class="fa fa-caret-up" id="increaseHour"></button>
+				<button class="fa fa-caret-up arrow" id="increaseHour"></button>
 				<input class="inputAlarmTime" value="00" id="setHour">
-				<button class="fa fa-caret-down" id="reduceHour"></button>
+				<button class="fa fa-caret-down arrow" id="reduceHour"></button>
 			</div>
 				<span class="inputAlarmTime">:</span>
 			<div class="minuteDiv">
-				<button class="fa fa-caret-up" id="increaseMinute"></button>
+				<button class="fa fa-caret-up arrow" id="increaseMinute"></button>
 				<input class="inputAlarmTime" value="00" id="setMinute">
-				<button class="fa fa-caret-down" id="reduceMinute"></button>
+				<button class="fa fa-caret-down arrow" id="reduceMinute"></button>
 			</div>
 		</div>
 		<div class="optionsDiv">
@@ -77,19 +77,26 @@
 	</div>
 	
 	<div class="wrapper" id="alarmDiv">
-			<span class="fa fa-bell"></span>
-			<p class="alarmSign">Budzik</p>
+			<span class="fa"></span>
+			<p class="alarmSign"></p>
 			<p id="alarmTime"></p>
 			<div class="napDiv">
-				<button id="napBtn">Drzemka 
+				<button id="napFive">Drzemka 
 				5 minut</button>
-				<button id ="stopBtn">Wyłacz budzik</button>
+				<button id ="stopBtn">Wyłącz budzik</button>
+				<div class="napButtons">
+					<button id="napThree">3 min</button>
+					<button id="napTen">10 min</button>
+					<button id="napFifteen">15 min</button>
+					<button id="napTwenty">20 min</button>
+				</div>
 			</div>
+
 	</div>
 
 
 		<audio loop id="music">
-		  <source src="Chat Noir Theme.ogg" type="audio/ogg">
+		  <source src="alarm.mp3" type="audio/mp3">
 		  <p>Your browser doesn't support HTML5 audio.</p>
 		</audio>
 </body>
