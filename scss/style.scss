@@ -259,12 +259,16 @@ input[type=checkbox] {
 	display: none;
 	padding-bottom: 20px;
 	text-align: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .fa-bell, .fa-bed {
 	color: rgba(255,255,255, 0.6);
 	font-size: 80pt;
-	padding: 60px 0 30px;
+	padding: 50px 0 30px;
+	margin-top: -200px;
+
 }
 
 .alarmSign {

@@ -1,6 +1,7 @@
 var setAlarmDiv = document.getElementById('setAlarmDiv');
 var alarmDiv = document.getElementById('alarmDiv');
 
+//alarm time variables 
 var alarmDays = document.querySelector("#alarmDays");
 var inputHour = document.getElementById("setHour");
 var inputMinute = document.getElementById("setMinute");
@@ -8,7 +9,7 @@ var setAlarmBtn = document.getElementById("setAlarmBtn");
 var alarmSecond = "00";
 var audio = document.getElementById("music");
 
-//variables to change alarm time by arrows
+//variables used to change alarm time by arrows
 var arrows = document.getElementsByClassName("arrow");
 var alarmSign = document.querySelector('.alarmSign');
 var increaseHour = document.querySelector("#increaseHour");
@@ -90,7 +91,7 @@ document.querySelector("#setMinute").addEventListener("keypress", function (evt)
     }
 });
 
-//function to add "0" to inputted time if it has only one digit
+//function to add "0" to input time if it has only one digit
 function checkTime(i){
 	if (i == 0 || i == 00){
 		return "00";
@@ -144,7 +145,7 @@ reduceMinute.addEventListener("click", function(){
 	}
 });
 
-//Function to make clock work
+//Function to make the clock work
 function startTime (){
 	var date = new Date();
 	var hours = date.getHours();
@@ -170,7 +171,7 @@ function setupClock() {
 	hoursHand.style.animationDelay = '-' + hours + 's';
 }
 
-//After load a page start clock
+//After loading a page start clock
 window.onload = startTime();
 
 //set and format alarm time
@@ -198,7 +199,7 @@ function setAlarm (){
 	return alarmTime;
 }
 
-//listen if user check all week
+//listen if user checked all week
 allWeek.addEventListener('click', function(){
 	//turn off other buttons
 	if (allWeek.checked){
@@ -225,7 +226,7 @@ allWeek.addEventListener('click', function(){
 	}
 });
 
-//listen if user check all weekdays
+//listen if user checked all weekdays
 weekdays.addEventListener('click', function(){
 	//turn off other buttons
 	if (weekdays.checked){
@@ -252,7 +253,7 @@ weekdays.addEventListener('click', function(){
 	}
 });
 
-//listen if user check all weekend
+//listen if user checked all weekend
 weekend.addEventListener('click', function(){
 	//turn off other buttons
 	if (weekend.checked){
@@ -360,9 +361,9 @@ function stopWaiting(){
 	return;
 };
 
-//what comes after current time is equal to alarm time
+//initiating alarm
 function alarm (){
-	alarmDiv.style.display = "block";
+	alarmDiv.style.display = "flex";
 	setAlarmDiv.style.display = "none";
 	audio.play();
 	alarmIcon.classList.add("fa-bell");
@@ -378,7 +379,7 @@ function alarm (){
 	stopBtn.addEventListener("click", stopAlarm);	
 }
 
-//what comes if user choose to nap for some time
+//initiating nap
 function napTime(minute) {
 	napTimeValue = minute;
 	console.log(napTimeValue);
@@ -392,7 +393,7 @@ function napTime(minute) {
 	waitForAlarm();
 }
 
-//what comes if user choose to stop alarm
+//stopping the alarm
 function stopAlarm() {
 	alarmDiv.style.display = "none";
 	setAlarmDiv.style.display = "block";
