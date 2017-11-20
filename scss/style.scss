@@ -12,6 +12,9 @@ body {
 	background: linear-gradient(to top,#6d61a5 20%, $darkestColor 100%);
 	border: 2px solid #eee;
 	border-radius: 10px;
+	@media #{$low1024}{
+		width: 100%;
+	}
 }
 
 #currentTime {
@@ -170,6 +173,9 @@ input[type=checkbox] {
 		color: $textColor;
 		font-weight: bold;
 		cursor: pointer;
+		@media #{$low1024}{
+			margin: 5px;
+		}
 
 		&:hover {
 			background-color: $brightestGrey;
@@ -220,6 +226,9 @@ input[type=checkbox] {
 		width: 150px;
 		height: 40px;
 		cursor: pointer;
+		@media #{$low1024}{
+			margin: 5px;
+		}
 
 		&:hover, &:focus{
 			background-color: #4F438A;

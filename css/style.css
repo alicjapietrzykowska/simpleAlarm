@@ -9,6 +9,9 @@ body {
   background: linear-gradient(to top, #6d61a5 20%, #392D75 100%);
   border: 2px solid #eee;
   border-radius: 10px; }
+  @media only screen and (max-width: 1024px) {
+    .wrapper {
+      width: 100%; } }
 
 #currentTime {
   color: white; }
@@ -143,6 +146,9 @@ input[type=checkbox] {
   color: #3A3261;
   font-weight: bold;
   cursor: pointer; }
+  @media only screen and (max-width: 1024px) {
+    .days label {
+      margin: 5px; } }
   .days label:hover {
     background-color: #dadada;
     -webkit-transition: background-color 0.3s;
@@ -185,6 +191,9 @@ input[type=checkbox] {
   width: 150px;
   height: 40px;
   cursor: pointer; }
+  @media only screen and (max-width: 1024px) {
+    .fewDays label {
+      margin: 5px; } }
   .fewDays label:hover, .fewDays label:focus {
     background-color: #4F438A;
     color: #ffffff;
