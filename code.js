@@ -10,51 +10,51 @@ const alarmSecond = "00";
 const audio = document.getElementById("music");
 
 //variables used to change alarm time by arrows
-var arrows = document.querySelectorAll(".arrow");
-var alarmSign = document.querySelector('.alarmSign');
-var increaseHour = document.querySelector("#increaseHour");
-var increaseMinute = document.querySelector("#increaseMinute");
-var reduceHour = document.querySelector("#reduceHour");
-var reduceMinute = document.querySelector("#reduceMinute");
+const arrows = document.querySelectorAll(".arrow");
+const alarmSign = document.querySelector('.alarmSign');
+const increaseHour = document.querySelector("#increaseHour");
+const increaseMinute = document.querySelector("#increaseMinute");
+const reduceHour = document.querySelector("#reduceHour");
+const reduceMinute = document.querySelector("#reduceMinute");
 
 //Default nap status
-var nap = false;
+let nap = false;
 
 //Nap buttons
-var napButtons = document.querySelectorAll('button[data-nap]')
+const napButtons = document.querySelectorAll('button[data-nap]')
 
-var napFive = document.getElementById("napFive");
-var napThree = document.querySelector("#napThree");
-var napTen = document.querySelector("#napTen");
-var napFifteen = document.querySelector("#napFifteen");
-var napTwenty = document.querySelector("#napTwenty");
+const napFive = document.getElementById("napFive");
+const napThree = document.querySelector("#napThree");
+const napTen = document.querySelector("#napTen");
+const napFifteen = document.querySelector("#napFifteen");
+const napTwenty = document.querySelector("#napTwenty");
 
-var alarmIcon = document.querySelector('#alarmDiv span');
-var stopBtn = document.getElementById("stopBtn");
+const alarmIcon = document.querySelector('#alarmDiv span');
+const stopBtn = document.getElementById("stopBtn");
 
 //Current date
-var days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
-var date = new Date();
-var currentDay = days[date.getDay()];
+let days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
+let date = new Date();
+let currentDay = days[date.getDay()];
 
 //check day to set alarm
-var allDays = document.getElementsByName("day");
-var fewDays = document.getElementsByName("fewDays");
-var weekendDays = document.querySelectorAll(".weekend");
-var allWeekdays = document.querySelectorAll(".weekdays");
-var allWeek = document.querySelector("#allWeek");
-var weekdays = document.querySelector("#weekdays");
-var weekend = document.querySelector("#weekend");
+const allDays = document.getElementsByName("day");
+const fewDays = document.getElementsByName("fewDays");
+const weekendDays = document.querySelectorAll(".weekend");
+const allWeekdays = document.querySelectorAll(".weekdays");
+const allWeek = document.querySelector("#allWeek");
+const weekdays = document.querySelector("#weekdays");
+const weekend = document.querySelector("#weekend");
 const inputs = document.querySelectorAll('input');
 
-var checkedDays = [];
+let checkedDays = [];
 
-var called = false;
+let called = false;
 
 //variables for analog clock
-var secondsHand = document.querySelector('.seconds');
-var minutesHand = document.querySelector('.minutes');
-var hoursHand = document.querySelector('.hours');
+const secondsHand = document.querySelector('.seconds');
+const minutesHand = document.querySelector('.minutes');
+const hoursHand = document.querySelector('.hours');
 
 
 //prevent input from setting number greater than 23, slice it to two digit if more
