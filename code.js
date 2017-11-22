@@ -1,13 +1,13 @@
-var setAlarmDiv = document.getElementById('setAlarmDiv');
-var alarmDiv = document.getElementById('alarmDiv');
+const setAlarmDiv = document.getElementById('setAlarmDiv');
+const alarmDiv = document.getElementById('alarmDiv');
 
 //alarm time variables 
-var alarmDays = document.querySelector("#alarmDays");
-var inputHour = document.getElementById("setHour");
-var inputMinute = document.getElementById("setMinute");
-var setAlarmBtn = document.getElementById("setAlarmBtn");
-var alarmSecond = "00";
-var audio = document.getElementById("music");
+const alarmDays = document.querySelector("#alarmDays");
+const inputHour = document.getElementById("setHour");
+const inputMinute = document.getElementById("setMinute");
+const setAlarmBtn = document.getElementById("setAlarmBtn");
+const alarmSecond = "00";
+const audio = document.getElementById("music");
 
 //variables used to change alarm time by arrows
 var arrows = document.getElementsByClassName("arrow");
@@ -56,27 +56,27 @@ var hoursHand = document.querySelector('.hours');
 
 
 //prevent input from setting number greater than 23, slice it to two digit if more
-inputHour.oninput = function () {
+inputHour.addEventListener('input', function () {
 	if (this.value > 23){
 		this.value = this.value[0];
 	}
 	if (this.value.length >= 2){
 		this.value = this.value.slice(0,2);
 	}
-}
+});
 
 //prevent input from setting number greater than 59, slice it to two digit if more
-inputMinute.oninput = function () {
+inputMinute.addEventListener('input', function () {
 	if (this.value > 59){
 		this.value = this.value[0];
 	}
 	if (this.value.length >= 2){
 		this.value = this.value.slice(0,2);
 	}
-}
+});
 
 //function to prevent input other than digits to hours
-document.querySelector("#setHour").addEventListener("keypress", function (evt) {
+inputHour.addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
     {
         evt.preventDefault();
@@ -84,16 +84,17 @@ document.querySelector("#setHour").addEventListener("keypress", function (evt) {
 });
 
 //function to prevent input other than digits to minutes
-document.querySelector("#setMinute").addEventListener("keypress", function (evt) {
+inputMinute.addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
     {
         evt.preventDefault();
     }
 });
 
+
 //function to add "0" to input time if it has only one digit
 function checkTime(i){
-	if (i == 0 || i == 00){
+	if (i == 0 || i == "00"){
 		return "00";
 	}
 	else if (i[0] == 0){
@@ -147,23 +148,26 @@ reduceMinute.addEventListener("click", function(){
 
 //Function to make the clock work
 function startTime (){
-	var date = new Date();
-	var hours = date.getHours();
-	var minutes = date.getMinutes();
-	var seconds = date.getSeconds();
+	let date = new Date();
+	let hours = date.getHours();
+	let minutes = date.getMinutes();
+	let seconds = date.getSeconds();
 	setupClock();
 	hours = checkTime(hours);
 	minutes = checkTime(minutes);
 	seconds = checkTime(seconds);
-	var currentTime = hours + ":" + minutes + ":" + seconds;
+	let currentTime = hours + ":" + minutes + ":" + seconds;
 	document.getElementById("currentTime").innerHTML = currentTime + " " + currentDay;
 	window.setTimeout(startTime, 500);
 	return currentTime;
 }
 
+//After loading a page start clock
+window.onload = startTime();
+
 //function for analog clock
 function setupClock() {
-	var secs = date.getSeconds(), 
+	let secs = date.getSeconds(), 
 		mins = (date.getMinutes() + date.getSeconds()/60) * 60 , 
 		hours = (date.getHours() + (date.getMinutes() + date.getSeconds()/60)/60) * 3600;
 	secondsHand.style.animationDelay = '-' + secs + 's';
@@ -171,13 +175,10 @@ function setupClock() {
 	hoursHand.style.animationDelay = '-' + hours + 's';
 }
 
-//After loading a page start clock
-window.onload = startTime();
-
 //set and format alarm time
 function setAlarm (){
-	var formattedHour = inputHour.value;
-	var formattedMinute = inputMinute.value;
+	let formattedHour = inputHour.value;
+	let formattedMinute = inputMinute.value;
 
 	formattedHour = checkTime(formattedHour);
 	inputHour.value = formattedHour;
@@ -194,7 +195,7 @@ function setAlarm (){
 	}
 	formattedMinute = checkTime(formattedMinute);
 	inputMinute.value = formattedMinute;
-	var alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
+	let alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
 	document.getElementById("alarmTime").innerHTML = formattedHour + ":" + formattedMinute;
 	return alarmTime;
 }
@@ -203,26 +204,16 @@ function setAlarm (){
 allWeek.addEventListener('click', function(){
 	//turn off other buttons
 	if (allWeek.checked){
-		if (weekdays.checked) {
+		if (weekdays.checked || weekend.checked) {
 			weekdays.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
-		}
-		if (weekend.checked) {
 			weekend.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
+			allDays.forEach(day => day.checked = false);
 		}
 	//check all days
-		for (var i = 0; i < allDays.length; i++){
-			allDays[i].checked = true;
-		}	
+		allDays.forEach(day => day.checked = true);	
 	} else {
-		for (var i = 0; i < allDays.length; i++){
-			allDays[i].checked = false;
-		}	
+	//uncheck all days
+		allDays.forEach(day => day.checked = false);
 	}
 });
 
@@ -230,26 +221,16 @@ allWeek.addEventListener('click', function(){
 weekdays.addEventListener('click', function(){
 	//turn off other buttons
 	if (weekdays.checked){
-		if (allWeek.checked) {
+		if (allWeek.checked || weekend.checked) {
 			allWeek.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
-		}
-		if (weekend.checked) {
 			weekend.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
+			allDays.forEach(day => day.checked = false);
 		}
 	//check weekdays
-		for (var i = 0; i < (allWeekdays.length); i++){
-			allWeekdays[i].checked = true;
-		}	
+		allWeekdays.forEach(day => day.checked = true);	
 	} else {
-		for (var i = 0; i < (allWeekdays.length); i++){
-			allWeekdays[i].checked = true;
-		}	
+	//uncheck weekdays
+		allWeekdays.forEach(day => day.checked = false);
 	}
 });
 
@@ -257,28 +238,19 @@ weekdays.addEventListener('click', function(){
 weekend.addEventListener('click', function(){
 	//turn off other buttons
 	if (weekend.checked){
-		if (allWeek.checked) {
+		if (allWeek.checked || weekdays.checked) {
 			allWeek.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
-		}
-		if (weekdays.checked) {
 			weekdays.checked = false;
-			for (var i = 0; i < allDays.length; i++){
-				allDays[i].checked = false;
-			}
+			allDays.forEach(day => day.checked = false);
 		}
-	//check all weekend days
-		for (var i = 0; i < weekendDays.length; i++){
-			weekendDays[i].checked = true;
-		}	
+	//check weekend
+		weekendDays.forEach(day => day.checked = true);	
 	} else {
-		for (var i = 0; i < weekendDays.length; i++){
-			weekendDays[i].checked = false;
-		}	
+	//uncheck weekend
+		weekendDays.forEach(day => day.checked = false);
 	}
 });
+
 
 //find checked days and add to array
 function checkDay (){
