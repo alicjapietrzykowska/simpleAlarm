@@ -3,6 +3,7 @@ const alarmDiv = document.getElementById('alarmDiv');
 
 //alarm time variables 
 const alarmDays = document.querySelector("#alarmDays");
+const setAlarmInputs = document.querySelectorAll('.chooseAlarmTime input');
 const inputHour = document.getElementById("setHour");
 const inputMinute = document.getElementById("setMinute");
 const setAlarmBtn = document.getElementById("setAlarmBtn");
@@ -70,6 +71,10 @@ inputMinute.addEventListener('input', function () {
 	}
 });
 
+setAlarmInputs.forEach(input => input.addEventListener('click', function(){
+		this.select();
+	}));
+
 //function to prevent input other than digits to hours
 inputHour.addEventListener("keypress", function (evt) {
     if (evt.which > 57 || evt.which > 93)
@@ -105,7 +110,7 @@ function checkTime(i){
 }
 
 //functions for arrows
-increaseHour.addEventListener("mousedown", function(){
+increaseHour.addEventListener("click", function(){
 	if (inputHour.value == 23){
 		inputHour.value = "00";
 	} else {
