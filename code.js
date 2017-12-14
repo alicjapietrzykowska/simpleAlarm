@@ -1,3 +1,5 @@
+// (function(){
+
 const setAlarmDiv = document.getElementById('setAlarmDiv');
 const alarmDiv = document.getElementById('alarmDiv');
 
@@ -77,22 +79,14 @@ inputMinute.addEventListener('input', function () {
 	}
 });
 
-//function to prevent input other than digits to hours
-inputHour.addEventListener("keypress", function (evt) {
-    if (evt.which > 57 || evt.which > 93)
-    {
-        evt.preventDefault();
-    }
-});
 
-//function to prevent input other than digits to minutes
-inputMinute.addEventListener("keypress", function (evt) {
-    if (evt.which > 57 || evt.which > 93)
-    {
-        evt.preventDefault();
-    }
-});
+setAlarmInputs.forEach(input => input.addEventListener('click', function(){
+		this.select();
+	}));
 
+setAlarmInputs.forEach(input => input.addEventListener('input', function(){
+		this.value = this.value.replace(/[^0-9]/g, '');
+}));
 
 //function to add "0" to input time if it has only one digit
 function checkTime(i){
@@ -367,3 +361,5 @@ function stopAlarm() {
 	audio.currentTime = 0;
 	stopWaiting();
 }
+
+// }());
