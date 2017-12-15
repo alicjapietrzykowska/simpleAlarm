@@ -1,98 +1,28 @@
-// (function(){
+(function(){
 
+//change screen values
 const setAlarmDiv = document.getElementById('setAlarmDiv');
 const alarmDiv = document.getElementById('alarmDiv');
 
 //alarm time variables 
-const alarmDays = document.querySelector("#alarmDays");
-const setAlarmInputs = document.querySelectorAll('.chooseAlarmTime input');
+const inputs = document.querySelectorAll('input');
 const inputHour = document.getElementById("setHour");
 const inputMinute = document.getElementById("setMinute");
+const arrows = document.querySelectorAll(".arrow");
+const allDays = document.getElementsByName("day");
 const setAlarmBtn = document.getElementById("setAlarmBtn");
-const alarmSecond = "00";
+
+//screen on alarm
+const alarmSign = document.querySelector('.alarmSign');
+const alarmIcon = document.querySelector('#alarmDiv span');
 const audio = document.getElementById("music");
 
-//variables used to change alarm time by arrows
-const arrows = document.querySelectorAll(".arrow");
-const alarmSign = document.querySelector('.alarmSign');
-const increaseHour = document.querySelector("#increaseHour");
-const increaseMinute = document.querySelector("#increaseMinute");
-const reduceHour = document.querySelector("#reduceHour");
-const reduceMinute = document.querySelector("#reduceMinute");
-
-//Nap buttons
-const napButtons = document.querySelectorAll('button[data-nap]')
-
-const napFive = document.getElementById("napFive");
-const napThree = document.querySelector("#napThree");
-const napTen = document.querySelector("#napTen");
-const napFifteen = document.querySelector("#napFifteen");
-const napTwenty = document.querySelector("#napTwenty");
-
-const alarmIcon = document.querySelector('#alarmDiv span');
-const stopBtn = document.getElementById("stopBtn");
-
-//check day to set alarm
-const allDays = document.getElementsByName("day");
-const fewDays = document.getElementsByName("fewDays");
-const weekendDays = document.querySelectorAll(".weekend");
-const allWeekdays = document.querySelectorAll(".weekdays");
-const allWeek = document.querySelector("#allWeek");
-const weekdays = document.querySelector("#weekdays");
-const weekend = document.querySelector("#weekend");
-const inputs = document.querySelectorAll('input');
-
-//variables for analog clock
-const secondsHand = document.querySelector('.seconds');
-const minutesHand = document.querySelector('.minutes');
-const hoursHand = document.querySelector('.hours');
-
-//Default status
+//Default status of values
 let nap = false;
+let called = false;
 let checkedDays = [];
 let date = new Date();
-let called = false;
 
-//prevent input from setting number greater than 23, slice it to two digit if more
-inputHour.addEventListener('input', function () {
-	if (this.value > 23){
-		this.value = this.value[0];
-	}
-	if (this.value.length >= 2){
-		this.value = this.value.slice(0,2);
-	}
-});
-
-//prevent input from setting number greater than 59, slice it to two digit if more
-inputMinute.addEventListener('input', function () {
-	if (this.value > 59){
-		this.value = this.value[0];
-	}
-	if (this.value.length >= 2){
-		this.value = this.value.slice(0,2);
-	}
-});
-
-
-setAlarmInputs.forEach(input => input.addEventListener('click', function(){
-		this.select();
-	}));
-
-//function to prevent input other than digits to hours
-inputHour.addEventListener("keypress", function (evt) {
-    if (evt.which > 57 || evt.which > 93)
-    {
-        evt.preventDefault();
-    }
-});
-
-setAlarmInputs.forEach(input => input.addEventListener('click', function(){
-		this.select();
-	}));
-
-setAlarmInputs.forEach(input => input.addEventListener('input', function(){
-		this.value = this.value.replace(/[^0-9]/g, '');
-}));
 
 //function to add "0" to input time if it has only one digit
 function checkTime(i){
@@ -111,43 +41,6 @@ function checkTime(i){
 	}
 }
 
-//functions for arrows
-increaseHour.addEventListener("click", function(){
-	if (inputHour.value == 23){
-		inputHour.value = "00";
-	} else {
-		inputHour.value = parseFloat(inputHour.value) + 1;
-		inputHour.value = checkTime(inputHour.value);
-	}
-});
-
-increaseMinute.addEventListener("click", function(){
-	if (inputMinute.value == 59){
-		inputMinute.value = "00";
-	} else {
-		inputMinute.value = parseFloat(inputMinute.value) + 1;
-		inputMinute.value = checkTime(inputMinute.value);
-	}
-});
-
-reduceHour.addEventListener("click", function(){
-	if (inputHour.value == 0){
-		inputHour.value = "23";
-	} else {
-		inputHour.value = parseFloat(inputHour.value) - 1;
-		inputHour.value = checkTime(inputHour.value);
-	}
-});
-
-reduceMinute.addEventListener("click", function(){
-	if (inputMinute.value == 00){
-		inputMinute.value = "59";
-	} else {
-		inputMinute.value = parseFloat(inputMinute.value) - 1;
-		inputMinute.value = checkTime(inputMinute.value);
-	}
-});
-
 //Function to make the clock work
 function startTime (){
 	let date = new Date();
@@ -164,11 +57,12 @@ function startTime (){
 	return currentTime;
 }
 
-//After loading a page start clock
-window.onload = startTime();
-
 //function for analog clock
 function setupClock() {
+	//variables for analog clock
+	const secondsHand = document.querySelector('.seconds'),
+		minutesHand = document.querySelector('.minutes'),
+		hoursHand = document.querySelector('.hours');
 	let secs = date.getSeconds(), 
 		mins = (date.getMinutes() + date.getSeconds()/60) * 60 , 
 		hours = (date.getHours() + (date.getMinutes() + date.getSeconds()/60)/60) * 3600;
@@ -179,82 +73,54 @@ function setupClock() {
 
 //set and format alarm time
 function setAlarm (){
-	let formattedHour = inputHour.value;
-	let formattedMinute = inputMinute.value;
-
-	formattedHour = checkTime(formattedHour);
-	inputHour.value = formattedHour;
+	const alarmSecond = "00";
+	let chosenHour = inputHour.value,
+		chosenMinute = inputMinute.value;
 	// set nap if was chosen
 	if (nap === true){
-		formattedMinute = parseFloat(formattedMinute) + napTimeValue;
-		if (formattedMinute > 59){
-			formattedHour = parseFloat(formattedHour) + 1;
-			formattedMinute = String(formattedMinute).charAt(1);
-		}
-		inputHour.value = formattedHour;
-		inputMinute.value = formattedMinute;
-		nap = false;
+		snooze(chosenHour, chosenMinute);
 	}
-	formattedMinute = checkTime(formattedMinute);
-	inputMinute.value = formattedMinute;
-	let alarmTime = formattedHour + ":" + formattedMinute + ":" + alarmSecond;
-	document.getElementById("alarmTime").innerHTML = formattedHour + ":" + formattedMinute;
+	let alarmTime = chosenHour + ":" + chosenMinute + ":" + alarmSecond;
+	document.getElementById("alarmTime").innerHTML = chosenHour + ":" + chosenMinute;
 	return alarmTime;
 }
 
-//listen if user checked all week
-allWeek.addEventListener('click', function(){
-	//turn off other buttons
-	if (allWeek.checked){
-		if (weekdays.checked || weekend.checked) {
-			weekdays.checked = false;
-			weekend.checked = false;
-			allDays.forEach(day => day.checked = false);
-		}
-	//check all days
-		allDays.forEach(day => day.checked = true);	
-	} else {
-	//uncheck all days
-		allDays.forEach(day => day.checked = false);
+//change alarmTime when user chosen to snooze
+function snooze(chosenHour, chosenMinute){
+	chosenMinute = parseFloat(chosenMinute) + napTimeValue;
+	if (chosenMinute > 59){
+		chosenHour = parseFloat(chosenHour) + 1;
+		chosenMinute = chosenMinute - 60;
 	}
-});
+	chosenHour = checkTime(chosenHour);
+	inputHour.value = chosenHour;
+	chosenMinute = checkTime(chosenMinute);
+	inputMinute.value = chosenMinute;
+	nap = false;
+}
 
-//listen if user checked all weekdays
-weekdays.addEventListener('click', function(){
-	//turn off other buttons
-	if (weekdays.checked){
-		if (allWeek.checked || weekend.checked) {
-			allWeek.checked = false;
-			weekend.checked = false;
-			allDays.forEach(day => day.checked = false);
-		}
-	//check weekdays
-		allWeekdays.forEach(day => day.checked = true);	
-	} else {
-	//uncheck weekdays
-		allWeekdays.forEach(day => day.checked = false);
-	}
-});
 
-//listen if user checked all weekend
-weekend.addEventListener('click', function(){
-	//turn off other buttons
-	if (weekend.checked){
-		if (allWeek.checked || weekdays.checked) {
-			allWeek.checked = false;
-			weekdays.checked = false;
-			allDays.forEach(day => day.checked = false);
-		}
-	//check weekend
-		weekendDays.forEach(day => day.checked = true);	
+function selectFewDays (selectedBtn) {
+	//select all days with the same dataset as button
+	let selectedDataset = selectedBtn.dataset.days;
+	let selectedDays;
+	if (selectedDataset === "alldays") selectedDays = allDays;
+	else selectedDays = document.querySelectorAll(`input[data-days="${selectedDataset}"]`);
+	if (selectedBtn.checked){
+		//uncheck already checked days
+		inputs.forEach(input => {
+			if (input === selectedBtn) return;
+			input.checked = false
+		});
+	//check selected days
+		selectedDays.forEach(day => day.checked = true);	
 	} else {
-	//uncheck weekend
-		weekendDays.forEach(day => day.checked = false);
-	}
-});
+	//uncheck selected days
+		selectedDays.forEach(day => day.checked = false);
+	}	
+}
 
 //Current date
-
 function getDate (){
 	let days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piatek','Sobota'];
 	return days[date.getDay()];
@@ -276,26 +142,20 @@ function checkDay () {
 	})
 }
 
-//listen to setAlarmBtn to start main functions
-setAlarmBtn.addEventListener("click", function(){
-	if (called){
-		stopWaiting();
-	} else {
-		waitForAlarm();
-	}
-});
-
-
-//start alarm if current time === set alarm
-function waitForAlarm (){
-	setAlarmBtn.style.backgroundColor = '#6d60a5';
-	setAlarmBtn.innerHTML = "Zatrzymaj budzik";
+function hideArrows (arrows) {
 	arrows.forEach(arrow => {
 		arrow.style.opacity = "0";
 		arrow.setAttribute("aria-hidden", "true");
 		arrow.disabled = true;
 		arrow.style.cursor = "default";
 	});
+}
+
+//start alarm if current time === set alarm
+function waitForAlarm (){
+	setAlarmBtn.style.backgroundColor = '#6d60a5';
+	setAlarmBtn.innerHTML = "Zatrzymaj budzik";
+	hideArrows(arrows);
 	inputs.forEach(input => {
 		input.disabled = true;
 	});
@@ -310,17 +170,21 @@ function waitForAlarm (){
 	}, 500);
 };
 
-//stop alarm if user turned it off by button
-function stopWaiting(){
-	clearInterval(called);
-	checkedDays.length = 0;
-	setAlarmBtn.style.backgroundColor = '#392D75';
+function showArrows (arrows) {
 	arrows.forEach(arrow => {
 		arrow.style.opacity = "1";
 		arrow.removeAttribute("aria-hidden");
 		arrow.disabled = false;
 		arrow.style.cursor = "pointer";
 	});
+}
+
+//stop alarm if user turned it off by button
+function stopWaiting(){
+	clearInterval(called);
+	checkedDays.length = 0;
+	setAlarmBtn.style.backgroundColor = '#392D75';
+	showArrows(arrows);
 	inputs.forEach(input => {
 		input.disabled = false;
 	});
@@ -331,6 +195,8 @@ function stopWaiting(){
 
 //initiating alarm
 function alarm (){
+	const napButtons = document.querySelectorAll('button[data-nap]');
+	const stopBtn = document.getElementById("stopBtn");
 	//change screen
 	alarmDiv.style.display = "flex";
 	setAlarmDiv.style.display = "none";
@@ -353,7 +219,6 @@ function alarm (){
 //initiating nap
 function napTime() {
 	nap = true;
-	console.log(nap);
 	//turn off music
 	audio.pause();
 	audio.currentTime = 0;
@@ -374,4 +239,115 @@ function stopAlarm() {
 	stopWaiting();
 }
 
-// }());
+
+//Event Listeners for functions
+
+//After loading a page start clock
+window.addEventListener('load', startTime);
+
+//set time in inputs
+(function() {
+	// select all content in input
+	const setAlarmInputs = document.querySelectorAll('.chooseAlarmTime input');
+
+	setAlarmInputs.forEach(input => 
+		input.addEventListener('click', function(){
+			this.select();
+		})
+	);
+
+	//prevent input from setting number greater than 23, slice it to two digit if more
+	inputHour.addEventListener('input', function () {
+		//prevent input other than digits to inputs
+		this.value = this.value.replace(/[^0-9]/g, '');
+		if (this.value > 23){
+			this.value = this.value[0];
+		}
+		if (this.value.length >= 2){
+			this.value = this.value.slice(0,2);
+		}
+	});
+
+	//prevent input from setting number greater than 59, slice it to two digit if more
+	inputMinute.addEventListener('input', function () {
+		//prevent input other than digits to inputs
+		this.value = this.value.replace(/[^0-9]/g, '');
+		if (this.value > 59){
+			this.value = this.value[0];
+		}
+		if (this.value.length >= 2){
+			this.value = this.value.slice(0,2);
+		}
+	});
+
+	//add 0 to value if needed
+	window.addEventListener('click', function(){
+		inputHour.value = checkTime(inputHour.value);
+		inputMinute.value = checkTime(inputMinute.value);
+	});	
+
+	//functions for arrows
+	const increaseHour = document.querySelector("#increaseHour");
+	const increaseMinute = document.querySelector("#increaseMinute");
+	const reduceHour = document.querySelector("#reduceHour");
+	const reduceMinute = document.querySelector("#reduceMinute");
+
+	increaseHour.addEventListener("click", () => {
+		if (inputHour.value == 23){
+			inputHour.value = "00";
+		} else {
+			inputHour.value = parseFloat(inputHour.value) + 1;
+			inputHour.value = checkTime(inputHour.value);
+		}
+	});
+
+	increaseMinute.addEventListener("click", () => {
+		if (inputMinute.value == 59){
+			inputMinute.value = "00";
+		} else {
+			inputMinute.value = parseFloat(inputMinute.value) + 1;
+			inputMinute.value = checkTime(inputMinute.value);
+		}
+	});
+
+	reduceHour.addEventListener("click", () => {
+		if (inputHour.value == 0){
+			inputHour.value = "23";
+		} else {
+			inputHour.value = parseFloat(inputHour.value) - 1;
+			inputHour.value = checkTime(inputHour.value);
+		}
+	});
+
+	reduceMinute.addEventListener("click", () => {
+		if (inputMinute.value == 00){
+			inputMinute.value = "59";
+		} else {
+			inputMinute.value = parseFloat(inputMinute.value) - 1;
+			inputMinute.value = checkTime(inputMinute.value);
+		}
+	});
+})();
+
+//check day to set alarm
+(function() {
+	const allWeek = document.querySelector("#allWeek");
+	const weekdays = document.querySelector("#weekdays");
+	const weekend = document.querySelector("#weekend");
+	allWeek.addEventListener('click', () => selectFewDays(allWeek));
+	weekdays.addEventListener('click', () => selectFewDays(weekdays));
+	weekend.addEventListener('click', () => selectFewDays(weekend));
+})();
+
+//listen to setAlarmBtn to start main functions
+(function(){
+	setAlarmBtn.addEventListener("click", function(){
+		if (called){
+			stopWaiting();
+		} else {
+			waitForAlarm();
+		}
+	});
+})();
+
+}());
