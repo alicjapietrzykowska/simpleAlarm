@@ -1,3 +1,19 @@
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
 body {
   font-family: 'Open Sans', sans-serif; }
 
@@ -6,6 +22,7 @@ body {
   min-height: 800px;
   margin: 30px auto;
   width: 50%;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(20%, #6d61a5), to(#392D75));
   background: linear-gradient(to top, #6d61a5 20%, #392D75 100%);
   border: 2px solid #eee;
   border-radius: 10px; }
@@ -17,7 +34,8 @@ body {
   color: white; }
 
 #setAlarmDiv {
-  text-align: center; }
+  text-align: center;
+  /* display: none;*/ }
 
 .clock {
   margin: 20px auto;
@@ -25,6 +43,7 @@ body {
   height: 201px;
   border: 5px rgba(255, 255, 255, 0.5) solid;
   border-radius: 50%;
+  -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
   .clock .hours {
     border: 3px solid #ffffff;
@@ -33,9 +52,13 @@ body {
     border-radius: 2px;
     left: 100px;
     top: 100px;
+    -webkit-animation-name: rotate;
     animation-name: rotate;
+    -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
+    -webkit-animation-duration: 43200s;
     animation-duration: 43200s; }
   .clock .minutes {
     border: 2px solid #ffffff;
@@ -44,9 +67,13 @@ body {
     border-radius: 2px;
     left: 100px;
     top: 100px;
+    -webkit-animation-name: rotate;
     animation-name: rotate;
+    -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
+    -webkit-animation-duration: 3600s;
     animation-duration: 3600s; }
   .clock .seconds {
     border: 2px solid #6d60a5;
@@ -55,19 +82,18 @@ body {
     border-radius: 2px;
     left: 100px;
     top: 100px;
+    -webkit-animation-name: rotate;
     animation-name: rotate;
+    -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
+    -webkit-animation-duration: 60s;
     animation-duration: 60s; }
 
 .hand {
+  -webkit-transform-origin: top center;
   transform-origin: top center; }
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
 
 .inputAlarmTime {
   background: transparent;
@@ -88,20 +114,34 @@ input[type=number] {
   -moz-appearance: textfield; }
 
 .chooseAlarmTime {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding-bottom: 20px; }
 
 .hourDiv, .minuteDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column; }
   .hourDiv button, .minuteDiv button {
     background: none;
-    border: none; }
+    border: none;
+    cursor: pointer; }
   .hourDiv .fa, .minuteDiv .fa {
-    cursor: pointer;
     font-size: 40px;
     color: rgba(255, 255, 255, 0.5); }
 
@@ -121,22 +161,17 @@ input[type=checkbox] {
   position: absolute;
   top: -20px; }
 
-.days input:checked + span {
-  background-color: #392D75;
-  color: #ffffff;
-  -webkit-transition: background-color 0.1s;
-  transition: background-color 0.1s; }
-
-.days input:checked + span:hover {
-  background-color: #dadada;
-  color: #392D75;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s; }
-
 .days label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   width: 55px;
   height: 55px;
@@ -158,30 +193,43 @@ input[type=checkbox] {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s; }
   .days label span {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     height: 100%; }
 
-.fewDays input:checked + span {
+.days input:checked + label {
   background-color: #392D75;
-  height: 100%;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s; }
+  color: #ffffff;
+  -webkit-transition: background-color 0.1s;
+  transition: background-color 0.1s; }
 
-.fewDays input:checked + span:hover {
-  background-color: #2a2156;
-  color: #darkestColor;
-  height: 100%;
+.days input:checked + label:hover, .days input:focus + label {
+  background-color: #6d60a5;
+  color: #C9C7DC;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s; }
 
 .fewDays label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: 0 5px;
   background-color: #6d60a5;
@@ -200,10 +248,31 @@ input[type=checkbox] {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s; }
   .fewDays label span {
+    margin-top: -2px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
-    padding: 5px; }
+    height: 100%; }
+
+.fewDays input:checked + label {
+  background-color: #392D75;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s; }
+
+.fewDays input:checked + label:hover, .fewDays input:focus + label {
+  background-color: #2a2156;
+  color: #darkestColor;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s; }
 
 #setAlarmBtn {
   width: 80%;
@@ -223,7 +292,12 @@ input[type=checkbox] {
   display: none;
   padding-bottom: 20px;
   text-align: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column; }
 
 .fa-bell, .fa-bed {
@@ -242,6 +316,7 @@ input[type=checkbox] {
   margin: 0; }
 
 .napDiv #napFive {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0 5px;
   padding: 20px 30px;
@@ -251,7 +326,8 @@ input[type=checkbox] {
   font-weight: bold;
   font-size: 12pt;
   text-transform: uppercase;
-  cursor: pointer; }
+  cursor: pointer;
+  /* white-space: pre;*/ }
   .napDiv #napFive:hover, .napDiv #napFive:focus {
     background-color: #4F438A;
     color: #ffffff;
@@ -259,6 +335,7 @@ input[type=checkbox] {
     transition: background-color 0.3s; }
 
 .napDiv #stopBtn {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0 5px;
   padding: 20px 30px;
@@ -268,7 +345,8 @@ input[type=checkbox] {
   font-weight: bold;
   font-size: 12pt;
   text-transform: uppercase;
-  cursor: pointer; }
+  cursor: pointer;
+  /* white-space: pre;*/ }
   .napDiv #stopBtn:hover, .napDiv #stopBtn:focus {
     background-color: #4F438A;
     color: #ffffff;

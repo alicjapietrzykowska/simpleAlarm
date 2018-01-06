@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="pl">
 <head>
 	<meta charset="utf-8">
 		<script src="https://use.fontawesome.com/2ba0d7112c.js"></script>
@@ -11,89 +10,105 @@
 
 <body>
 	<div class="wrapper" id="setAlarmDiv">
-	<div class="clock">
-		<span class="hand seconds"></span>
-		<span class="hand minutes"></span>
-		<span class="hand hours"></span>
-	</div>
-	<p id="currentTime"></p>
-		<div class="chooseAlarmTime">
-			<div class="hourDiv">
-				<button class="fa fa-caret-up arrow" id="increaseHour"></button>
-				<input class="inputAlarmTime" value="00" id="setHour">
-				<button class="fa fa-caret-down arrow" id="reduceHour"></button>
-			</div>
-				<span class="inputAlarmTime">:</span>
-			<div class="minuteDiv">
-				<button class="fa fa-caret-up arrow" id="increaseMinute"></button>
-				<input class="inputAlarmTime" value="00" id="setMinute">
-				<button class="fa fa-caret-down arrow" id="reduceMinute"></button>
-			</div>
+		<div class="clock">
+			<span class="hand seconds"></span>
+			<span class="hand minutes"></span>
+			<span class="hand hours"></span>
 		</div>
-		<div class="optionsDiv">
-			<fieldset class="days">
- 				<label for="check_mon">
-					  <input type="checkbox" name="day" value="Poniedziałek" id="check_mon" data-days="weekdays">
-					  <span>Pn</span>
-				 </label>
-				<label for="check_tue">
-				  <input type="checkbox" name="day" value="Wtorek" id="check_tue" data-days="weekdays">
-					<span>Wt</span>
-				</label>
-				<label for="check_wed">
-				  <input type="checkbox" name="day" value="Środa" id="check_wed" data-days="weekdays">
-					<span>Śr</span>
-				</label>
-				<label for="check_thu">
-				  <input type="checkbox" name="day" value="Czwartek" id="check_thu" data-days="weekdays">
-					<span>Czw</span>
-				</label>
-				<label for ="check_fri">
-					<input type ="checkbox" name="day" value="Piatek" id="check_fri" data-days="weekdays">
-					<span>Pt</span>
-				</label>
-				<label for="check_sat">
-				  <input type="checkbox" name="day" value="Sobota" id="check_sat" data-days="weekend"  >
-					<span>So</span>
-				</label>
-				<label for="check_sun">
-				  <input type="checkbox" name="day" value="Niedziela" id="check_sun" data-days="weekend"  >
-					<span>Nd</span>
-				</label>
-			</fieldset>
-
-			<fieldset class="fewDays">
-				<label for="allWeek">
-					<input type="checkbox" name="fewDays" data-days="alldays" id="allWeek">
-					<span>Codziennie</span>
-				</label>
-				<label for="weekdays">
-					<input type="checkbox" name="fewDays" data-days="weekdays" id="weekdays">
-					<span>Dni powszednie</span>
-				</label>
-				<label for="weekend">
-					<input type="checkbox" name="fewDays" data-days="weekend" id="weekend">
-					<span>Weekend</span>
-				</label>
-			</fieldset>
-
-				<button id="setAlarmBtn">Ustaw budzik</button>
+		<p id="currentTime"></p>
+			<div class="chooseAlarmTime">
+				<div class="hourDiv">
+					<button class="arrow" title="Dodaj godzinę" aria-label="Dodaj godzinę" id="increaseHour">
+						<span class="fa fa-caret-up"></span>
+					</button>
+					<input class="inputAlarmTime" value="00" id="setHour">
+					<button class="arrow" title="Odejmij godzinę" aria-label="Odejmij godzinę" id="reduceHour">
+						<span class="fa fa-caret-down"></span>
+					</button>
+				</div>
+					<span class="inputAlarmTime">:</span>
+				<div class="minuteDiv">
+					<button class="arrow" title="Dodaj minutę" aria-label="Dodaj minutę" id="increaseMinute">
+						<span class="fa fa-caret-up"></span>
+					</button>
+					<input class="inputAlarmTime" value="00" id="setMinute">
+					<button class="arrow" title="Odejmij minutę" aria-label="Odejmij minutę" id="reduceMinute">
+						<span class="fa fa-caret-down"></span>
+					</button>
+				</div>
 			</div>
+			<div class="optionsDiv">
+				<fieldset class="days">
+					<input type="checkbox" name="day" value="poniedziałek" id="check_mon" data-days="weekdays">
+					<label title="Poniedziałek" aria-label="Poniedziałek" for="check_mon">
+						  <span>Pn</span>
+					 </label>
+					
+					<input type="checkbox" name="day" value="wtorek" id="check_tue" data-days="weekdays">
+					<label title="Wtorek" aria-label="Wtorek" for="check_tue">	
+						<span>Wt</span>
+					</label>
+					
+					<input type="checkbox" name="day" value="środa" id="check_wed" data-days="weekdays">
+					<label title="Środa" aria-label="Środa" for="check_wed">
+						<span>Śr</span>
+					</label>
+					
+					<input type="checkbox" name="day" value="czwartek" id="check_thu" data-days="weekdays">
+					<label title="Czwartek" aria-label="Czwartek" for="check_thu">	
+						<span>Czw</span>
+					</label>
+					
+					<input type="checkbox" name="day" value="piątek" id="check_fri" data-days="weekdays">
+					<label title="Piątek" aria-label="Piątek" for="check_fri">	
+						<span>Pt</span>
+					</label>
+					
+					<input type="checkbox" name="day" value="sobota" id="check_sat" data-days="weekend"  >
+					<label title="Sobota" aria-label="Sobota" for="check_sat">
+						<span>So</span>
+					</label>
+					
+					<input type="checkbox" name="day" value="niedziela" id="check_sun" data-days="weekend"  >
+					<label title="Niedziela" aria-label="Niedziela" for="check_sun">
+						<span>Nd</span>
+					</label>
+				</fieldset>
+
+				<fieldset class="fewDays">
+					<input type="checkbox" name="fewDays" data-days="alldays" id="allWeek">
+					<label title="Cały tydzień" aria-label="Cały tydzień" for="allWeek">
+						<span>Codziennie</span>
+					</label>
+					
+					<input type="checkbox" name="fewDays" data-days="weekdays" id="weekdays">
+					<label title="Od poniedziałku do piątku" aria-label="Od poniedziałku do piątku" for="weekdays">
+						<span>Dni powszednie</span>
+					</label>
+					
+					<input type="checkbox" name="fewDays" data-days="weekend" id="weekend">
+					<label title="Sobota i niedziela" aria-label="Sobota i niedziela" for="weekend">
+						<span>Weekend</span>
+					</label>
+				</fieldset>
+
+					<button id="setAlarmBtn">Ustaw budzik</button>
+				</div>
 	</div>
-	
+		
 	<div class="wrapper" id="alarmDiv">
 			<span class="fa"></span>
 			<p class="alarmSign"></p>
 			<p id="alarmTime"></p>
 			<div class="napDiv">
-				<button id="napFive" data-nap="4">Drzemka 
+				<button title="Włącz drzemkę 5 minutową" aria-label="Włącz drzemkę 5 minutową" id="napFive" data-nap="5">Drzemka 
 				5 minut</button>
 				<button id ="stopBtn">Wyłącz budzik</button>
 				<div class="napButtons">
-					<button id="napThree" data-nap="3">3 min</button>
-					<button id="napTen" data-nap="10">10 min</button>
-					<button id="napFifteen" data-nap="15">15 min</button>
-					<button id="napTwenty" data-nap="20">20 min</button>
+					<button id="napThree" data-nap="3" title="Włącz drzemkę 3 minutową" aria-label="Włącz drzemkę 3 minutową">3 min</button>
+					<button id="napTen" data-nap="10" title="Włącz drzemkę 10 minutową" aria-label="Włącz drzemkę 10 minutową">10 min</button>
+					<button id="napFifteen" data-nap="15" title="Włącz drzemkę 15 minutową" aria-label="Włącz drzemkę 15 minutową">15 min</button>
+					<button id="napTwenty" data-nap="20" title="Włącz drzemkę 20 minutową" aria-label="Włącz drzemkę 20 minutową">20 min</button>
 				</div>
 			</div>
 
