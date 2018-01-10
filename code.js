@@ -1,4 +1,4 @@
-// (function(){
+(function(){
 
 //switch between clock views
 const setAlarmDiv = document.getElementById('setAlarmDiv');
@@ -18,8 +18,10 @@ const alarmIcon = document.querySelector('#alarmDiv span');
 const audio = document.getElementById("music");
 
 //Default status of values
+let chosenAlarmTime;
+let currentTime;
 let nap = false;
-let called = false;
+let called = 0;
 let checkedDays = [];
 
 //add "0" to input time if it has only one digit
@@ -51,10 +53,9 @@ function startTime (){
 	hours = addZero(hours);
 	minutes = addZero(minutes);
 	seconds = addZero(seconds);
-	let time = hours + ":" + minutes + ":" + seconds;
-	document.getElementById("currentTime").innerHTML = time + " " + getDate();
-	window.setTimeout(startTime, 500);
-	return time;
+	currentTime = hours + ":" + minutes + ":" + seconds;
+	document.getElementById("currentTime").innerHTML = currentTime + " " + getDate();
+	window.setTimeout(startTime, 1000);
 }
 
 //change alarmTime when user chose to snooze
@@ -141,17 +142,6 @@ function hideArrows (arrows) {
 	});
 }
 
-function lookForAlarm () {
-	let currentDay = getDate();
-	let currentTime = startTime();
-	let chosenAlarmTime = setAlarm();
-	if (checkedDays.includes(currentDay)){
-		if (currentTime === chosenAlarmTime){
-			alarm();
-		}
-	}
-}
-
 //start alarm if current time === set alarm
 function waitForAlarm (){
 	setAlarmBtn.style.backgroundColor = '#6d60a5';
@@ -161,9 +151,10 @@ function waitForAlarm (){
 		input.disabled = true;
 	});
 	checkDay();
+	chosenAlarmTime = setAlarm();
 	called = setInterval (function(){
-		lookForAlarm();
-	}, 500);
+		detectAlarm();
+	}, 1000);
 };
 
 //show arrows when the alarm has been cancelled
@@ -178,7 +169,6 @@ function showArrows (arrows) {
 
 //stop alarm if user turned it off by button
 function stopWaiting(){
-	clearInterval(called);
 	checkedDays.length = 0;
 	setAlarmBtn.style.backgroundColor = '#392D75';
 	showArrows(arrows);
@@ -186,14 +176,16 @@ function stopWaiting(){
 		input.disabled = false;
 	});
 	setAlarmBtn.innerHTML = "Ustaw budzik";
-	called = false;
+	clearInterval(called);
+	called = 0;
 	return;
 };
 
 //initiating nap
-function napTime() {
+function napTime(e) {
+	let target = e.target;
+	napTimeValue = parseFloat(target.dataset.nap);
 	nap = true;
-	console.log(nap);
 	//turn off music
 	audio.pause();
 	audio.currentTime = 0;
@@ -217,8 +209,6 @@ function stopAlarm() {
 
 //initiating alarm
 function alarm (){
-	const napButtons = document.querySelectorAll('button[data-nap]');
-	const stopBtn = document.getElementById("stopBtn");
 	//change screen
 	alarmDiv.style.display = "flex";
 	setAlarmDiv.style.display = "none";
@@ -227,15 +217,17 @@ function alarm (){
 	alarmSign.innerHTML = "Budzik";
 	//start music
 	audio.play();
-	//listen if user chose to snooze
-	napButtons.forEach(button => {
-		button.addEventListener("click", () =>{
-			napTimeValue = parseFloat(button.dataset.nap);
-			napTime();
-		})
-	})
-	//listen if user chose to stop the alarm
-	stopBtn.addEventListener("click", stopAlarm);	
+}
+
+function detectAlarm () {
+	let currentDay = getDate();
+	if (checkedDays.includes(currentDay)){
+		if (currentTime === chosenAlarmTime){
+			clearInterval(called);
+			called = 0;
+			alarm();
+		}
+	}
 }
 
 function initialEventListeners() {
@@ -335,6 +327,17 @@ function initialEventListeners() {
 	allWeek.addEventListener('click', () => selectFewDays(allWeek));
 	weekdays.addEventListener('click', () => selectFewDays(weekdays));
 	weekend.addEventListener('click', () => selectFewDays(weekend));
+
+	
+	//listen if user chose to snooze
+	const napButtons = document.querySelectorAll('button[data-nap]');
+	napButtons.forEach(button => {
+		button.addEventListener("click", napTime);
+	});
+
+	//listen if user chose to stop the alarm
+	const stopBtn = document.getElementById("stopBtn");
+	stopBtn.addEventListener("click", stopAlarm);	
 };
 
 
@@ -344,4 +347,4 @@ window.addEventListener('load', ()=> {
 })
 
 
-// }());
+}());
