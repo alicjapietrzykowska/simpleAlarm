@@ -19,5 +19,6 @@ gulp.task('serve', function (){
 
 gulp.watch('./scss/*.scss', ['styles']);
 gulp.watch('./**/*.html').on('change', browserSync.reload);
+gulp.watch('./**/*.js').on('change', browserSync.reload);
 
 gulp.task('default', ['styles', 'serve']);

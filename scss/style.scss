@@ -15,11 +15,16 @@ body {
 	border-radius: 10px;
 	@media #{$low1024}{
 		width: 100%;
+		height: 100vh;
+		margin: 0;
 	}
 }
 
 #currentTime {
 	color: white;
+	@media #{$low1024}{
+		margin: 0;
+	}
 }
 
 #setAlarmDiv {
@@ -35,6 +40,11 @@ body {
 	border-radius: 50%;
 	-webkit-transform: rotate(180deg);
 	        transform: rotate(180deg);
+	@media #{$low1024}{
+		margin: 5px auto;
+		-webkit-transform: scale(0.7) rotate(180deg);
+		        transform: scale(0.7) rotate(180deg);
+	}
 
 	.hours {
 		border: 3px solid #ffffff;
@@ -83,6 +93,11 @@ body {
 	color: #ffffff;
 	font-size: 36pt;
 	width: 60px;
+
+	@media #{$low1024}{
+		font-size: 34pt;
+		text-align: center;
+	}
 }
 
 #setHour{
@@ -146,6 +161,10 @@ input[type=number] {
 	width: 100%;
 	padding: 20px 0;
 
+	@media #{$low1024}{
+		height: 350px;
+	}
+
 }
 
 fieldset {
@@ -180,7 +199,7 @@ input[type=checkbox] {
 		font-weight: bold;
 		cursor: pointer;
 		@media #{$low1024}{
-			margin: 5px;
+			margin: 3px;
 		}
 
 		&:hover {
@@ -244,7 +263,8 @@ input[type=checkbox] {
 		height: 40px;
 		cursor: pointer;
 		@media #{$low1024}{
-			margin: 5px;
+			margin-bottom: 5px;
+			width: 100%;
 		}
 
 		&:hover, &:focus{
