@@ -125,7 +125,7 @@ function selectFewDays (selectedBtn) {
 }
 
 //find checked days and add to array
-function getCheckedDays () {
+function getCheckedDays() {
 	allDays.forEach(day => {
 		if (day.checked) {
 			if (checkedDays.includes(day.value)){
@@ -226,8 +226,6 @@ function alarm (){
 function detectAlarm () {
 	//get alarm time
 	chosenAlarmTime = setAlarm();
-	//get chosen days
-	getCheckedDays();
 	//check every second if alarm should ring
 	called = setInterval (function(){
 		let currentDay = getDate();
@@ -247,6 +245,14 @@ function initialEventListeners() {
 		if (called){
 			stopWaiting();
 		} else {
+			let alert = document.querySelector('.alert');
+			alert.style.display = "none";
+			//get chosen days
+			getCheckedDays();
+			if (checkedDays.length === 0) {
+				alert.style.display = "block";
+				return;
+			}
 			waitForAlarm();
 		}
 	});

@@ -169,6 +169,10 @@ input[type=number] {
   @media only screen and (max-width: 1024px) {
     .optionsDiv {
       height: 350px; } }
+  .optionsDiv .alert {
+    display: none;
+    color: red;
+    font-weight: bold; }
 
 fieldset {
   border: none; }

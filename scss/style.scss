@@ -165,6 +165,12 @@ input[type=number] {
 		height: 350px;
 	}
 
+	.alert {
+		 display: none;
+		color: red;
+		font-weight: bold;
+	}
+
 }
 
 fieldset {
