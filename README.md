@@ -1,5 +1,7 @@
 # Simple Alarm
 
+**[LIVE PREVIEW](https://alicjalukaszewska.github.io/simpleAlarm/)** 
+
 Browser alarm clock with options to choose days and nap time. Current time is shown by an analog clock. Application language is Polish and its convention of time is 24-hour clock.
 
 ## Technology:
@@ -21,6 +23,7 @@ Clicking button to set alarm turns off options to change alarm time. Clicking it
 When alarm rings, user can choose if he or she wants to stop alarm or to snooze for few minutes. Clicking nap buttons adds nap minutes to alarm time. Clicking stop alarm button allow user to set alarm again. 
 
 
+---
 ### Current problems:
 - [ ] When tab or window with application is inactive, browsers slow down intervals, which can cause problems with getting right second to ring an alarm. 
 - [ ] Because mobile devices don’t support autoplay HTML audio, alarm won’t play music on mobile. 
