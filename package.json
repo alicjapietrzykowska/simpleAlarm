@@ -1,34 +1,18 @@
 {
-  "name": "alarmclock",
+  "name": "budzik",
   "version": "1.0.0",
-  "description": "Simple alarm with day option\u001b[D\u001b[C",
-  "main": "index.html",
+  "description": "**[LIVE PREVIEW](https://alicjalukaszewska.github.io/simpleAlarm/)**",
+  "main": "code.js",
+  "dependencies": {
+    "browser-sync": "^2.27.5",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.43.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "alarm",
-    "clock",
-    "watch"
-  ],
-  "author": "Alicja Łukaszewska",
-  "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
-  },
-  "dependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alicjalukaszewska/simpleAlarm.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alicjalukaszewska/simpleAlarm/issues"
-  },
-  "homepage": "https://github.com/alicjalukaszewska/simpleAlarm#readme"
+  "author": "",
+  "license": "ISC"
 }
